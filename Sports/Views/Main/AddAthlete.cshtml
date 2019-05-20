@@ -1,0 +1,36 @@
+﻿@using Sports.Core;
+@model Sports.Core.Athlete
+@{
+    int testid = (int)ViewData["testid"];
+    List<User> athletes = (List<User>)ViewData["list"];
+}
+<div class="container">
+    @if (athletes.Count > 0)
+    {
+        <div class="form-horizontal">
+            <form asp-action="AddAthlete" asp-controller="Main" method="post">
+                <div class="form-group">
+                    <label for="UserId">Select Athlete</label>
+                    <select id="UserId" name="UserId" asp-for="UserId" class="form-control">
+                        <option value="-1">--select--</option>
+                        @foreach (var user in athletes) {
+                            <option value="@user.Id">@user.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Result">Enter Result</label>
+                    <input type="number" asp-for="Result" name="Result" id="Result"/>
+                    <input type="hidden" asp-for="TestId" name="TestId" value="@testid" />
+                </div>
+                <button input="submit" class="btn btn-primary">Add</button>
+                <a asp-action="DetailTest" asp-controller="Main" asp-route-Id="@testid" class="btn btn-primary">Cancel</a>
+            </form>
+        </div>
+    }
+    else
+    {
+        <h2>No Athlete found. Please add Athlete first in "Athletes" section </h2>
+        <a asp-action="DetailTest" asp-controller="Main" asp-route-Id="@testid" class="btn btn-primary">Back To Test Details</a>
+    }
+</div>

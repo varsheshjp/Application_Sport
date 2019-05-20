@@ -1,0 +1,18 @@
+﻿@model UserResult;
+@{
+    var athlete = (UserResult)ViewData["user"];
+    var testid = (int)ViewData["testid"];
+}
+<div class="container">
+    <h2>@athlete.Name  :</h2>
+    <form asp-action="EditResultTest" asp-controller="Main" method="post">
+        <div class="form-group">
+            <lable for="Result">Edit Result</lable>
+            <input type="number" asp-for="Result" name="Result" id="Result" value="@athlete.Result" class="form-control" />
+            <input type="hidden" asp-for="Id" name="Id" value="@athlete.Id">
+            <input type="hidden" asp-for="Name" name="Name" value="@athlete.Name">
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="DetailTest" asp-controller="Main" class="btn btn-primary">Cancel</a>
+    </form>
+</div>

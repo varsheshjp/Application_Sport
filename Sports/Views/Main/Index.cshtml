@@ -1,0 +1,39 @@
+﻿@using Sports.Core;
+@model Sports.Core.User
+@{
+    List<User> users =(List<User>) ViewData["UserList"];
+}
+<div class="container">
+    <div style="margin:10px" class="form">
+        <form asp-action="LogIn" asp-controller="Main" asp-method="post">
+            <div class="form-group">
+                <label for="Id">Select User:</label>
+                <select name="Id" id="Id" asp-for="Id" onclick="validate()" class="form-control">
+                    <option value="-1">--select--</option>
+                    @foreach (var item in users)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <button type="submit" id="submit" onmouseover="validate()" class="btn btn-primary">Log in</button>
+                <a asp-action="CreateCoach" asp-controller="Main" class="=btn btn-default">Create new User</a>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        function validate() {
+            console.log("validate");
+            var x = document.getElementById("Id").value;
+            console.log(x);
+            if (x == -1) {
+                document.getElementById("submit").disabled = true;
+            }
+            else {
+                document.getElementById("submit").disabled = false;
+            }
+        }
+    </script>
+</div>
+

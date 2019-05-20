@@ -1,0 +1,41 @@
+﻿@using Sports.Core;
+@{
+    List<Test> testList =(List<Test>) ViewData["TestList"];
+}
+<div class="container">
+    <h2>Dashboard</h2>
+    @if (testList.Count > 0)
+    {
+        <div class="table">
+            <table class="table table-hover">
+                <tr>
+                    <th>Creation Date</th>
+                    <th>Number of Participant</th>
+                    <th>Test Type(yyyy-mm-dd)</th>
+                    <th>Edit test</th>
+                    <th>Details</th>
+                    <th>Delete</th>
+                </tr>
+                @foreach (var test in testList)
+                {
+                    <tr>
+                        <th>@test.Date</th>
+                        <th>@test.Number</th>
+                        <th>@test.Type</th>
+                        <th><a asp-action="EditTest" asp-controller="Main" asp-route-Id="@test.Id" class="btn btn-primary">Edit</a></th>
+                        <th><a asp-action="DetailTest" asp-controller="Main" asp-route-Id="@test.Id" class="btn btn-primary">View</a></th>
+                        <th><a asp-action="DeleteTest" asp-controller="Main" asp-route-Id="@test.Id" class="btn btn-primary">Delete</a></th>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+    else
+    {
+        <h3>No records Found</h3>
+    }
+        <div>
+            <a asp-action="CreateTest" asp-controller="Main" class="btn btn-primary">Create Test</a>
+            <a asp-action="LogOut" asp-controller="Main" class="btn btn-danger">LogOut</a>
+        </div>
+</div>
