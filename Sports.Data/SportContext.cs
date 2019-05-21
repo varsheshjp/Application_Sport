@@ -15,14 +15,5 @@ namespace Sports.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Athlete> Athletes { get; set; }
     }
-    public class ApplicationContextDbFactory : IDesignTimeDbContextFactory<SportContext>
-    {
-        SportContext IDesignTimeDbContextFactory<SportContext>.CreateDbContext(string[] args)
-        {
-
-            var builder = new DbContextOptionsBuilder<SportContext>();
-            builder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SportSite2;Integrated Security=True;");
-            return new SportContext(builder.Options);
-        }
-    }
+    
 }
