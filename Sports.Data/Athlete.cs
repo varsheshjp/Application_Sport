@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Sports.Core
+namespace Sports.Data
 {
-    public class User
+    public class Athlete
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
+        public int TestId { get; set; }
+        public int UserId { get; set; }
+        public int Result { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Sports.Core;
+﻿using Sports.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;

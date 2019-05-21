@@ -4643,16 +4643,6 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "Sports.Core/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "compile": {
-          "bin/placeholder/Sports.Core.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Sports.Core.dll": {}
-        }
-      },
       "Sports.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -4660,8 +4650,7 @@
           "Microsoft.EntityFrameworkCore": "2.1.4",
           "Microsoft.EntityFrameworkCore.Design": "2.1.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.4",
-          "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.6",
-          "Sports.Core": "1.0.0"
+          "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.6"
         },
         "compile": {
           "bin/placeholder/Sports.Data.dll": {}
@@ -12613,11 +12602,6 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
-    "Sports.Core/1.0.0": {
-      "type": "project",
-      "path": "../Sports.Core/Sports.Core.csproj",
-      "msbuildProject": "../Sports.Core/Sports.Core.csproj"
-    },
     "Sports.Data/1.0.0": {
       "type": "project",
       "path": "../Sports.Data/Sports.Data.csproj",
@@ -12630,7 +12614,6 @@
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.9",
-      "Sports.Core >= 1.0.0",
       "Sports.Data >= 1.0.0"
     ]
   },
@@ -12664,9 +12647,6 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Core\\Sports.Core.csproj": {
-              "projectPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Core\\Sports.Core.csproj"
-            },
             "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Data\\Sports.Data.csproj": {
               "projectPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Data\\Sports.Data.csproj"
             }

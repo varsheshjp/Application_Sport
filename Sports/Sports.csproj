@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sports.Core\Sports.Core.csproj" />
     <ProjectReference Include="..\Sports.Data\Sports.Data.csproj" />
   </ItemGroup>
 

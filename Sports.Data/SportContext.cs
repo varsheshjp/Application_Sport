@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Sports.Core;
+using Sports.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;

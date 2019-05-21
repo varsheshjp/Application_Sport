@@ -46,9 +46,7 @@ C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.dll
 C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.pdb
 C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.Views.dll
 C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.Views.pdb
-C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.Core.dll
 C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.Data.dll
-C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.Core.pdb
 C:\Users\varshesh\Desktop\Sports\Sports\bin\Debug\netcoreapp2.1\Sports.Data.pdb
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Sports.csprojAssemblyReference.cache
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Sports.csproj.CoreCompileInputs.cache

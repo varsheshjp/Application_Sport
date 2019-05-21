@@ -20,7 +20,7 @@ namespace Sports.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Sports.Core.Athlete", b =>
+            modelBuilder.Entity("Sports.Data.Athlete", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,7 +37,7 @@ namespace Sports.Data.Migrations
                     b.ToTable("Athletes");
                 });
 
-            modelBuilder.Entity("Sports.Core.Test", b =>
+            modelBuilder.Entity("Sports.Data.Test", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,7 +56,7 @@ namespace Sports.Data.Migrations
                     b.ToTable("Tests");
                 });
 
-            modelBuilder.Entity("Sports.Core.User", b =>
+            modelBuilder.Entity("Sports.Data.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

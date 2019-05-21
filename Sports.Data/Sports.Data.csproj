@@ -11,8 +11,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Sports.Core\Sports.Core.csproj" />
-  </ItemGroup>
-
 </Project>

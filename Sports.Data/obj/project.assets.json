@@ -960,16 +960,6 @@
         "compile": {
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
-      },
-      "Sports.Core/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "compile": {
-          "bin/placeholder/Sports.Core.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Sports.Core.dll": {}
-        }
       }
     }
   },
@@ -3635,11 +3625,6 @@
         "system.threading.tasks.4.0.11.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
-    },
-    "Sports.Core/1.0.0": {
-      "type": "project",
-      "path": "../Sports.Core/Sports.Core.csproj",
-      "msbuildProject": "../Sports.Core/Sports.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3648,8 +3633,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 2.1.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.4",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 1.1.6",
-      "Microsoft.NETCore.App >= 2.1.0",
-      "Sports.Core >= 1.0.0"
+      "Microsoft.NETCore.App >= 2.1.0"
     ]
   },
   "packageFolders": {
@@ -3681,11 +3665,7 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {
-            "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Core\\Sports.Core.csproj": {
-              "projectPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Core\\Sports.Core.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
