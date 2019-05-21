@@ -1,7 +1,8 @@
 ﻿@using Sports.Core;
+@model DetailTestModel
 @{
-    Test test = (Test)ViewData["Test"];
-    List<UserResult> athletes = (List<UserResult>)ViewData["Athletes"];
+    Test test = Model.test;
+    List<UserResult> athletes = Model.athletes;
 }
 <div class="container">
     <h1>@test.Type : @test.Date</h1>

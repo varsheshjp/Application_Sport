@@ -1,16 +1,17 @@
 ﻿@model UserResult;
 @{
-    var athlete = (UserResult)ViewData["user"];
-    var testid = (int)ViewData["testid"];
+    var result = Model.Result;
+    var id = Model.Id;
+    var name = Model.Name;
 }
 <div class="container">
-    <h2>@athlete.Name  :</h2>
+    <h2>@name  :</h2>
     <form asp-action="EditResultTest" asp-controller="Main" method="post">
         <div class="form-group">
             <lable for="Result">Edit Result</lable>
-            <input type="number" asp-for="Result" name="Result" id="Result" value="@athlete.Result" class="form-control" />
-            <input type="hidden" asp-for="Id" name="Id" value="@athlete.Id">
-            <input type="hidden" asp-for="Name" name="Name" value="@athlete.Name">
+            <input type="number" asp-for="Result" name="Result" id="Result" value="@result" class="form-control" />
+            <input type="hidden" asp-for="Id" name="Id" value="@id">
+            <input type="hidden" asp-for="Name" name="Name" value="@name">
         </div>
         <button class="btn btn-primary" type="submit">Save</button>
         <a asp-action="DetailTest" asp-controller="Main" class="btn btn-primary">Cancel</a>

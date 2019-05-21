@@ -40,115 +40,17 @@ namespace Sports.Controllers
             }
             List<User> userlist = await this.data.GetAllCoach();
             ViewData["Title"] = "Log In";
-            ViewData["UserList"] = userlist;
-            return View();
+            var model = new IndexModel() { users = userlist };
+            return View(model);
         }
 
-        public IActionResult LogIn(User user) {
+        public IActionResult LogIn(IndexModel model) {
             
-            this.SetId(user.Id);
+            this.SetId(model.user.Id);
             return RedirectToAction("Dashboard","Main");
         }
-
-        [HttpGet]
-        public IActionResult CreateCoach() {
-            
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddUser(User user) {
-            
-            await this.data.AddUser(user);
-            return RedirectToAction("Index", "Main");
-        }
-        public async Task<IActionResult> Dashboard() {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            var testList = await this.data.GetAllTest(this.GetId());
-            ViewData["TestList"] = testList;
-            return View();
-        }
-        [HttpGet]
-        public IActionResult CreateTest() {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            ViewData["userid"] = GetId();
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateTest(Test test) {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            await this.data.AddTest(test);
-            return RedirectToAction("Dashboard", "Main");
-        }
-        public async Task<IActionResult> AthleteList() {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            var list = await this.data.GetAllAthlete();
-            ViewData["UserList"] = list;
-            return View();
-        }
-        [HttpGet]
-        public IActionResult CreateUser() {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateUser(User user) {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            await this.data.AddUser(user);
-            return RedirectToAction("AthleteList", "Main");
-        }
-        public async Task<IActionResult> DetailTest(int Id) {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            var test = await this.data.GetTest(Id);
-            var list = await this.data.GetAllAthleteInGivenTest(Id);
-            var k = new List<UserResult>();
-            foreach (var a in list) {
-                var c = new UserResult() { Id = a.Id, Name = (await this.data.GetUser(a.UserId)).Name, Result = a.Result };
-                k.Add(c);
-            }
-            ViewData["Athletes"] = k;
-            ViewData["Test"] = test;
-            return View();
-        }
-        [HttpGet]
-        public async Task<IActionResult> EditTest(int Id) {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            ViewData["test"] = await this.data.GetTest(Id);
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> EditTest(Test test) {
-            if (!isLogedIn())
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            await this.data.EditTest(test);
-            return RedirectToAction("Dashboard", "Main");
-        }
+        
+        //no need of model
         public async Task<IActionResult> DeleteTest(int Id) {
             if (!isLogedIn())
             {
@@ -165,25 +67,118 @@ namespace Sports.Controllers
             await this.data.DeleteAthlete(Id);
             return RedirectToAction("AthleteList", "Main");
         }
+
+        //Model has been added in this methods  
         [HttpGet]
         public async Task<IActionResult> AddAthlete(int Id) {
             if (!isLogedIn())
             {
                 return RedirectToAction("LogOut", "Main");
             }
+            var model = new AddAthleteModel();
             var list = await this.data.GetAllAthlete();
-            ViewData["list"] = list;
-            ViewData["testid"] = Id;
-            return View();
+            model.athletes = list;
+            model.testid = Id;
+            return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> AddAthlete(Athlete a) {
+        public async Task<IActionResult> AddAthlete(AddAthleteModel model) {
             if (!isLogedIn())
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            await this.data.AddAthleteToTest(new Athlete { TestId=a.TestId,Result=a.Result,UserId=a.UserId});
-            return RedirectToAction("DetailTest", "Main",new { Id=a.TestId});
+            await this.data.AddAthleteToTest(new Athlete { TestId= model.athlete.TestId,Result= model.athlete.Result,UserId= model.athlete.UserId});
+            return RedirectToAction("DetailTest", "Main",new { Id= model.athlete.TestId});
+        }
+        public async Task<IActionResult> AthleteList()
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            var list = await this.data.GetAllAthlete();
+            var model = new AthleteListModel() { users = list };
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult CreateCoach()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddUser(User user)
+        {
+
+            await this.data.AddUser(user);
+            return RedirectToAction("Index", "Main");
+        }
+        [HttpGet]
+        public IActionResult CreateTest()
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            var model = new CreateTestModel() { userid = GetId() };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateTest(CreateTestModel model)
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            Test testi = model.test;
+            await this.data.AddTest(testi);
+            return RedirectToAction("Dashboard", "Main");
+        }
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(User user)
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            await this.data.AddUser(user);
+            return RedirectToAction("AthleteList", "Main");
+        }
+        public async Task<IActionResult> Dashboard()
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            var testList = await this.data.GetAllTest(this.GetId());
+            var model = new DashboardModel() { testList = testList };
+            return View(model);
+        }
+        public async Task<IActionResult> DetailTest(int Id)
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            var test = await this.data.GetTest(Id);
+            var list = await this.data.GetAllAthleteInGivenTest(Id);
+            var userList = new List<UserResult>();
+            foreach (var athlete in list)
+            {
+                var newData = new UserResult() { Id = athlete.Id, Name = (await this.data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
+                userList.Add(newData);
+            }
+            var model = new DetailTestModel() { test = test, athletes = userList };
+            return View(model);
         }
         [HttpGet]
         public async Task<IActionResult> EditResultTest(int Id) {
@@ -191,22 +186,20 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            var a = await this.data.GetAthlete(Id);
-            var u = new UserResult() { Id = a.Id, Name = (await this.data.GetUser(a.UserId)).Name, Result = a.Result };
-            var i = a.TestId;
-            ViewData["user"] = u;
-            ViewData["testid"] = i;
-            return View();
+            var athlete = await this.data.GetAthlete(Id);
+            var model = new UserResult() { Id = athlete.Id, Name = (await this.data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
+            
+            return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> EditResultTest(UserResult user) {
+        public async Task<IActionResult> EditResultTest(UserResult model) {
             if (!isLogedIn())
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            var a = await this.data.GetAthlete(user.Id);
-            await this.data.EditResult(user.Id, user.Result);
-            return RedirectToAction("DetailTest", "Main", new { Id = a.TestId });
+            var athlete = await this.data.GetAthlete(model.Id);
+            await this.data.EditResult(model.Id, model.Result);
+            return RedirectToAction("DetailTest", "Main", new { Id = athlete.TestId });
         }
         [HttpGet]
         public async Task<IActionResult> DeleteAthleteFromTest(int Id) {
@@ -214,10 +207,31 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            var a = await this.data.GetAthlete(Id);
+            var athlete = await this.data.GetAthlete(Id);
             await this.data.DeleteAthleteFromTest(Id);
-            return RedirectToAction("DetailTest", "Main", new { Id = a.TestId });
+            return RedirectToAction("DetailTest", "Main", new { Id = athlete.TestId });
         }
+        [HttpGet]
+        public async Task<IActionResult> EditTest(int Id)
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            var model = await this.data.GetTest(Id);
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditTest(Test test)
+        {
+            if (!isLogedIn())
+            {
+                return RedirectToAction("LogOut", "Main");
+            }
+            await this.data.EditTest(test);
+            return RedirectToAction("Dashboard", "Main");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

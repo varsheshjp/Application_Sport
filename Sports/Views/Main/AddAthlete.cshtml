@@ -1,8 +1,8 @@
 ﻿@using Sports.Core;
-@model Sports.Core.Athlete
+@model AddAthleteModel
 @{
-    int testid = (int)ViewData["testid"];
-    List<User> athletes = (List<User>)ViewData["list"];
+    int testid = Model.testid;
+    List<User> athletes = Model.athletes;
 }
 <div class="container">
     @if (athletes.Count > 0)
@@ -11,7 +11,7 @@
             <form asp-action="AddAthlete" asp-controller="Main" method="post">
                 <div class="form-group">
                     <label for="UserId">Select Athlete</label>
-                    <select id="UserId" name="UserId" asp-for="UserId" class="form-control">
+                    <select id="UserId" name="athlete.UserId" asp-for="athlete.UserId" class="form-control">
                         <option value="-1">--select--</option>
                         @foreach (var user in athletes) {
                             <option value="@user.Id">@user.Name</option>
@@ -20,8 +20,8 @@
                 </div>
                 <div class="form-group">
                     <label for="Result">Enter Result</label>
-                    <input type="number" asp-for="Result" name="Result" id="Result"/>
-                    <input type="hidden" asp-for="TestId" name="TestId" value="@testid" />
+                    <input type="number" asp-for="athlete.Result" name="athlete.Result" id="Result"/>
+                    <input type="hidden" asp-for="athlete.TestId" name="athlete.TestId" value="@testid" />
                 </div>
                 <button input="submit" class="btn btn-primary">Add</button>
                 <a asp-action="DetailTest" asp-controller="Main" asp-route-Id="@testid" class="btn btn-primary">Cancel</a>

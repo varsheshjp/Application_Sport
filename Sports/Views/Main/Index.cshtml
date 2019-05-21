@@ -1,14 +1,14 @@
 ﻿@using Sports.Core;
-@model Sports.Core.User
+@model IndexModel
 @{
-    List<User> users =(List<User>) ViewData["UserList"];
+    List<User> users = Model.users;
 }
 <div class="container">
     <div style="margin:10px" class="form">
         <form asp-action="LogIn" asp-controller="Main" asp-method="post">
             <div class="form-group">
                 <label for="Id">Select User:</label>
-                <select name="Id" id="Id" asp-for="Id" onclick="validate()" class="form-control">
+                <select name="user.Id" id="Id" asp-for="user.Id" onclick="validate()" class="form-control">
                     <option value="-1">--select--</option>
                     @foreach (var item in users)
                     {

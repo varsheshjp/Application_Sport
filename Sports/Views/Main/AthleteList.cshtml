@@ -1,6 +1,7 @@
 ﻿@using Sports.Core;
+@model AthleteListModel
 @{
-    List<User> users = (List<User>)ViewData["UserList"];
+    List<User> users = Model.users;
 }
 <div class="container">
     @if (users.Count > 0)

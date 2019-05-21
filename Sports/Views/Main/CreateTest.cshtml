@@ -1,6 +1,6 @@
-﻿@model Sports.Core.Test;
+﻿@model CreateTestModel
 @{
-    int userid = (int)ViewData["userid"];
+    int userid = Model.userid;
 }
 
 <div class="container" style="margin:10px">
@@ -8,30 +8,26 @@
         <form asp-action="CreateTest" asp-controller="Main" method="post">
             <div class="form-group">
                 <label for="Date">Test Date</label>
-                <input type="date" id="Date" name="Date" asp-for="Date" class="form-control" onclick="validate()" onkeyup="validate()">
+                <input type="date" id="Date" name="test.Date" asp-for="test.Date" class="form-control" onclick="validate()" onkeyup="validate()">
                 <p id="name" style="color:red"></p>
             </div>
             <div class="form-group">
                 <label for="Type">Test Type</label>
-                <select id="Type" name="Type" asp-fro="Type" class="form-control custom-select" onclick="validate()">
+                <select id="Type" name="test.Type" asp-for="test.Type" class="form-control custom-select" onclick="validate()">
                     <option value="null" selected disabled>--select--</option>
                     <option value="Coopertest">Coopertest</option>
                     <option value="100 meter sprint">100 meter sprint</option>
                 </select>
                 <p id="list" style="color:red"></p>
             </div>
-
-            <input type="hidden" name="CoachId" id="CoachId" asp-for="CoachId" value="@userid" />
-            <input type="hidden" name="Number" id="Number" asp-for="Number" value="0" />
+            <input type="hidden" name="test.CoachId" id="test.CoachId" asp-for="test.CoachId" value="@userid" />
+            <input type="hidden" name="test.Number" id="test.Number" asp-for="test.Number" value="0" />
             <button type="submit" id="submit" onmouseover="validate()" class="btn btn-primary">Create</button>
             <a asp-action="Dashboard" asp-controller="Main" class="btn btn-primary">Cancel</a>
             <script type="text/javascript">
                 function validate() {
-
                     var a = document.getElementById("Date").value;
                     var b = document.getElementById("Type").value;
-
-
                     if (a == "") {
                         document.getElementById("name").innerHTML = "please select Date";
                         a = false;

@@ -1,6 +1,7 @@
 ﻿@using Sports.Core;
+@model DashboardModel
 @{
-    List<Test> testList =(List<Test>) ViewData["TestList"];
+    List<Test> testList =Model.testList;
 }
 <div class="container">
     <h2>Dashboard</h2>
