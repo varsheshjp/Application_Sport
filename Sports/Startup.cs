@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sports.Data;
@@ -32,8 +34,9 @@ namespace Sports
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContextPool<SportContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SportSite")));
+            services.AddEntityFrameworkSqlServer().AddDbContext<SportContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SportSite")));
             services.AddScoped<IDatabase, Database>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<SportContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -56,7 +59,8 @@ namespace Sports
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseFileServer();
+            app.UseIdentity();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

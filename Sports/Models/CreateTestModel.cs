@@ -9,6 +9,6 @@ namespace Sports.Models
     public class CreateTestModel
     {
         public Test test { get; set; }
-        public int userid { get; set; }
+        public string userid { get; set; }
     }
 }

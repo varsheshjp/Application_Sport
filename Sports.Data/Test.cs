@@ -12,6 +12,6 @@ namespace Sports.Data
         public string Date { get; set; }
         public int Number { get; set; }
         public string Type { get; set; }
-        public int CoachId { get; set; }
+        public string CoachId { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sports.Data;
 
 namespace Sports.Data.Migrations
 {
     [DbContext(typeof(SportContext))]
-    partial class SportContextModelSnapshot : ModelSnapshot
+    [Migration("20190521101030_lasttolasttolast")]
+    partial class lasttolasttolast
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

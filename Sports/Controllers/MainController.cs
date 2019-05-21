@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sports.Data;
 using Sports.Models;
@@ -14,44 +15,89 @@ namespace Sports.Controllers
     public class MainController : Controller
     {
         private IDatabase data;
-        public MainController(IDatabase data)
+        private SignInManager<ApplicationUser> _signManager;
+        private UserManager<ApplicationUser> _userManager;
+        public MainController(IDatabase data,UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
         {
             this.data = data;
-        }
-        public int GetId()
-        {
-            return (int)HttpContext.Session.GetInt32("userid");
-        }
-        public void SetId(int id)
-        {
-            HttpContext.Session.SetInt32("userid", id);
-        }
-        public bool isLogedIn()
-        {
-            return (HttpContext.Session.GetInt32("userid") != null) && (HttpContext.Session.GetInt32("userid") != -1);
+            _userManager = userManager;
+            _signManager = signManager;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string returnUrl = "")
         {
-            if (isLogedIn())
+            if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Dashboard", "Main");
             }
-            List<User> userlist = await this.data.GetAllCoach();
-            ViewData["Title"] = "Log In";
-            var model = new IndexModel() { users = userlist };
+            var model = new LoginViewModel { ReturnUrl = returnUrl };
+            return View(model);
+        }
+        [HttpGet]
+        public ViewResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Username };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _signManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Main");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signManager.PasswordSignInAsync(model.Username,
+                   model.Password, model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        Console.WriteLine("We goes here--varshesh-------------------->>>>>");
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Dashboard", "Main");
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Invalid login attempt");
             return View(model);
         }
 
-        public IActionResult LogIn(IndexModel model) {
-            
-            this.SetId(model.user.Id);
-            return RedirectToAction("Dashboard","Main");
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signManager.SignOutAsync();
+            return RedirectToAction("Index", "Main");
         }
         
+
+
         //no need of model
         public async Task<IActionResult> DeleteTest(int Id) {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("LogOut", "Main");
             }
@@ -59,7 +105,7 @@ namespace Sports.Controllers
             return RedirectToAction("Dashboard", "Main");
         }
         public async Task<IActionResult> DeleteUser(int Id) {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("LogOut", "Main");
             }
@@ -70,7 +116,7 @@ namespace Sports.Controllers
         //Model has been added in this methods  
         [HttpGet]
         public async Task<IActionResult> AddAthlete(int Id) {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("LogOut", "Main");
             }
@@ -82,7 +128,7 @@ namespace Sports.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> AddAthlete(AddAthleteModel model) {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("LogOut", "Main");
             }
@@ -91,7 +137,7 @@ namespace Sports.Controllers
         }
         public async Task<IActionResult> AthleteList()
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("LogOut", "Main");
             }
@@ -99,35 +145,24 @@ namespace Sports.Controllers
             var model = new AthleteListModel() { users = list };
             return View(model);
         }
+        
         [HttpGet]
-        public IActionResult CreateCoach()
+        public async Task<IActionResult> CreateTest()
         {
-
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> AddUser(User user)
-        {
-
-            await this.data.AddUser(user);
-            return RedirectToAction("Index", "Main");
-        }
-        [HttpGet]
-        public IActionResult CreateTest()
-        {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
-            var model = new CreateTestModel() { userid = GetId() };
+            var currentUser=await _userManager.GetUserAsync(HttpContext.User);
+            var model = new CreateTestModel() { userid = currentUser.Id };
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> CreateTest(CreateTestModel model)
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             Test testi = model.test;
             await this.data.AddTest(testi);
@@ -136,37 +171,38 @@ namespace Sports.Controllers
         [HttpGet]
         public IActionResult CreateUser()
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> CreateUser(User user)
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             await this.data.AddUser(user);
             return RedirectToAction("AthleteList", "Main");
         }
         public async Task<IActionResult> Dashboard()
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
-            var testList = await this.data.GetAllTest(this.GetId());
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var testList = await this.data.GetAllTest(currentUser.Id);
             var model = new DashboardModel() { testList = testList };
             return View(model);
         }
         public async Task<IActionResult> DetailTest(int Id)
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             var test = await this.data.GetTest(Id);
             var list = await this.data.GetAllAthleteInGivenTest(Id);
@@ -181,9 +217,9 @@ namespace Sports.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> EditResultTest(int Id) {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             var athlete = await this.data.GetAthlete(Id);
             var model = new UserResult() { Id = athlete.Id, Name = (await this.data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
@@ -192,9 +228,9 @@ namespace Sports.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> EditResultTest(UserResult model) {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             var athlete = await this.data.GetAthlete(model.Id);
             await this.data.EditResult(model.Id, model.Result);
@@ -202,9 +238,9 @@ namespace Sports.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> DeleteAthleteFromTest(int Id) {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             var athlete = await this.data.GetAthlete(Id);
             await this.data.DeleteAthleteFromTest(Id);
@@ -213,9 +249,9 @@ namespace Sports.Controllers
         [HttpGet]
         public async Task<IActionResult> EditTest(int Id)
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             var model = await this.data.GetTest(Id);
             return View(model);
@@ -223,9 +259,9 @@ namespace Sports.Controllers
         [HttpPost]
         public async Task<IActionResult> EditTest(Test test)
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             await this.data.EditTest(test);
             return RedirectToAction("Dashboard", "Main");
@@ -235,16 +271,11 @@ namespace Sports.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            if (!isLogedIn())
+            if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("LogOut", "Main");
+                return RedirectToAction("Logout", "Main");
             }
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        public async Task<IActionResult> LogOut()
-        {
-            HttpContext.Session.SetInt32("userid", -1);
-            return RedirectToAction("Index", "Main");
         }
     }
 }

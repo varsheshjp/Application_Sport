@@ -137,7 +137,7 @@ using Sports.Data;
             WriteLiteral("</th>\n                            <th>");
             EndContext();
             BeginContext(787, 112, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2854f3d62e8547a9a8a98d3021a837de", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6306a0d8c14a439c8594c8314beb89ad", async() => {
                 BeginContext(891, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -175,7 +175,7 @@ using Sports.Data;
             WriteLiteral("</th>\n                            <th>");
             EndContext();
             BeginContext(937, 121, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e15fc420a0fd4a869d0038ecb342eaca", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "078aaa370ab54c26b70a8d63595135e9", async() => {
                 BeginContext(1048, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -239,7 +239,7 @@ using Sports.Data;
             WriteLiteral("            <div>\n                ");
             EndContext();
             BeginContext(1275, 113, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cba3ebb8d9074c25a490dc6f562be11a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "35c685bed26640d58f7eb6a6f963c29b", async() => {
                 BeginContext(1373, 11, true);
                 WriteLiteral("Add Athlete");
                 EndContext();
@@ -277,7 +277,7 @@ using Sports.Data;
             WriteLiteral("\n                ");
             EndContext();
             BeginContext(1405, 93, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41f90daa0e1e45b5b4610f813b0cf52b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0960ff74e7104dbcb05cd9db5abc53c7", async() => {
                 BeginContext(1477, 17, true);
                 WriteLiteral("Back To Dashboard");
                 EndContext();

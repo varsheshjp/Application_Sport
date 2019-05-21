@@ -17,7 +17,7 @@ namespace Sports.Data
         Task<bool> EditResult(int aid,int result);
         Task<List<Athlete>> GetAllAthleteInGivenTest(int testid);
         Task<Athlete> GetAthlete(int aid);
-        Task<List<Test>> GetAllTest(int userid);
+        Task<List<Test>> GetAllTest(string userid);
         Task<Test> GetTest(int testid);
         Task<List<User>> GetAllCoach();
         Task<List<User>> GetAllAthlete();
@@ -39,7 +39,7 @@ namespace Sports.Data
 
         public async Task<bool> AddUser(User user)
         {
-            this.databaseContext.Users.Add(user);
+            this.databaseContext.mainUsers.Add(user);
             return (await this.databaseContext.SaveChangesAsync() > 0);
         }
         public async Task<bool> AddAthleteToTest(Athlete a) {
@@ -49,13 +49,13 @@ namespace Sports.Data
         }
         public async Task<bool> DeleteAthlete(int userid)
         {
-            var user = await this.databaseContext.Users.FindAsync(userid);
+            var user = await this.databaseContext.mainUsers.FindAsync(userid);
             var at = from a in this.databaseContext.Athletes where a.UserId == user.Id select a;
             foreach (var a in at) {
                 (await this.databaseContext.Tests.FindAsync(a.TestId)).Number -= 1;
                 this.databaseContext.Athletes.Remove(a);
             }
-            this.databaseContext.Users.Remove(user);
+            this.databaseContext.mainUsers.Remove(user);
             return (await this.databaseContext.SaveChangesAsync() > 0); 
         }
 
@@ -96,8 +96,8 @@ namespace Sports.Data
 
         public async Task<List<User>> GetAllAthlete()
         {
-            var users = from user in this.databaseContext.Users where user.Type == "Athlete" select user;
-            return await users.ToAsyncEnumerable<User>().ToList<User>();
+            var mainUsers = from user in this.databaseContext.mainUsers where user.Type == "Athlete" select user;
+            return await mainUsers.ToAsyncEnumerable<User>().ToList<User>();
         }
 
         public async Task<List<Athlete>> GetAllAthleteInGivenTest(int testid)
@@ -108,11 +108,11 @@ namespace Sports.Data
 
         public async Task<List<User>> GetAllCoach()
         {
-            var Coaches= from user in this.databaseContext.Users where user.Type == "Coach" select user;
+            var Coaches= from user in this.databaseContext.mainUsers where user.Type == "Coach" select user;
             return await Coaches.ToAsyncEnumerable<User>().ToList<User>();
         }
 
-        public async Task<List<Test>> GetAllTest(int userid)
+        public async Task<List<Test>> GetAllTest(string userid)
         {
             var tests = from test in this.databaseContext.Tests where test.CoachId == userid select test;
             return await tests.ToAsyncEnumerable<Test>().ToList<Test>();
@@ -130,7 +130,7 @@ namespace Sports.Data
 
         public async Task<User> GetUser(int userid)
         {
-            return await this.databaseContext.Users.FindAsync(userid);
+            return await this.databaseContext.mainUsers.FindAsync(userid);
         }
     }
 }

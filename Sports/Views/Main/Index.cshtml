@@ -1,39 +1,30 @@
-﻿@using Sports.Data;
-@model IndexModel
+﻿@model LoginViewModel
 @{
-    List<User> users = Model.users;
+    ViewBag.Title = "Login";
 }
+<h2>Login</h2>
 <div class="container">
-    <div style="margin:10px" class="form">
-        <form asp-action="LogIn" asp-controller="Main" asp-method="post">
-            <div class="form-group">
-                <label for="Id">Select User:</label>
-                <select name="user.Id" id="Id" asp-for="user.Id" onclick="validate()" class="form-control">
-                    <option value="-1">--select--</option>
-                    @foreach (var item in users)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                </select>
-            </div>
-            <div>
-                <button type="submit" id="submit" onmouseover="validate()" class="btn btn-primary">Log in</button>
-                <a asp-action="CreateCoach" asp-controller="Main" class="=btn btn-default">Create new User</a>
-            </div>
-        </form>
-    </div>
-    <script type="text/javascript">
-        function validate() {
-            console.log("validate");
-            var x = document.getElementById("Id").value;
-            console.log(x);
-            if (x == -1) {
-                document.getElementById("submit").disabled = true;
-            }
-            else {
-                document.getElementById("submit").disabled = false;
-            }
-        }
-    </script>
-</div>
+    <form method="post" asp-controller="Main" asp-action="Login"
+          asp-route-returnurl="@Model.ReturnUrl">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username"></span>
+        </div>
 
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RememberMe"></label>
+            <input asp-for="RememberMe" class="checkbox" />
+            <span asp-validation-for="RememberMe"></span>
+        </div>
+        <input type="submit" value="Login" class="btn btn-primary" />
+        <a asp-action="Register" asp-controller="Main" class="btn btn-primary">Register</a>
+    </form>
+</div>
