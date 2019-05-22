@@ -85,8 +85,8 @@ namespace Sports.Data
 
         public async Task<List<Athlete>> GetAllAthleteInGivenTest(int testId)
         {
-            var Athletes = from athlete in this.databaseContext.Athletes where athlete.TestId == testId select athlete;
-            return await Athletes.ToAsyncEnumerable<Athlete>().ToList<Athlete>();
+            var athletes = from athlete in this.databaseContext.Athletes where athlete.TestId == testId select athlete;
+            return await athletes.ToAsyncEnumerable<Athlete>().ToList<Athlete>();
         }
         
         public async Task<List<Test>> GetAllTest(string userId)

@@ -1,6 +1,6 @@
 ﻿@model CreateTestModel
 @{
-    string userid = Model.userid;
+    string userId = Model.userid;
 }
 
 <div class="container" style="margin:10px">
@@ -20,7 +20,7 @@
                 </select>
                 <p id="list" style="color:red"></p>
             </div>
-            <input type="hidden" name="test.CoachId" id="test.CoachId" asp-for="test.CoachId" value="@userid" />
+            <input type="hidden" name="test.CoachId" id="test.CoachId" asp-for="test.CoachId" value="@userId" />
             <input type="hidden" name="test.Number" id="test.Number" asp-for="test.Number" value="0" />
             <button type="submit" id="submit" onmouseover="validate()" class="btn btn-primary">Create</button>
             <a asp-action="Dashboard" asp-controller="Main" class="btn btn-primary">Cancel</a>
