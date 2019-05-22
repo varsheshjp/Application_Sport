@@ -1,0 +1,12 @@
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\bin\Debug\netcoreapp2.1\Sports.Core.deps.json
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\bin\Debug\netcoreapp2.1\Sports.Core.dll
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\bin\Debug\netcoreapp2.1\Sports.Core.pdb
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\bin\Debug\netcoreapp2.1\Sports.DomainModel.dll
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\bin\Debug\netcoreapp2.1\Sports.DomainModel.pdb
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.csprojAssemblyReference.cache
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.csproj.CoreCompileInputs.cache
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.AssemblyInfoInputs.cache
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.AssemblyInfo.cs
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.csproj.CopyComplete
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.dll
+C:\Users\varshesh\Desktop\Structured_sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.pdb
