@@ -98,7 +98,7 @@ using Sports.Data;
             WriteLiteral("</th>\n                        <th>");
             EndContext();
             BeginContext(476, 106, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8d2b388b496432fa546a6f69e52722f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "db9ef4e4d0d445a48e48f9e336b44238", async() => {
                 BeginContext(572, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -162,7 +162,7 @@ using Sports.Data;
             WriteLiteral("        <div>\n            ");
             EndContext();
             BeginContext(755, 95, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "69d9116275a74c70b40e3ee841194392", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4b3e3562065a47359f0e54ffea7981e7", async() => {
                 BeginContext(828, 18, true);
                 WriteLiteral("Create New Athlete");
                 EndContext();
@@ -187,7 +187,7 @@ using Sports.Data;
             WriteLiteral("\n            ");
             EndContext();
             BeginContext(863, 78, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "337b7d6dae27412db949d28a720c4e91", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5cb3285fa5f4412cb53593d60f0dd0ac", async() => {
                 BeginContext(931, 6, true);
                 WriteLiteral("LogOut");
                 EndContext();

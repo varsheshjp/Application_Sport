@@ -59,7 +59,6 @@ C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Sports.TagHelper
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Sports.RazorCoreGenerate.cache
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Razor\Views\Main\AddAthlete.g.cshtml.cs
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Razor\Views\Main\AthleteList.g.cshtml.cs
-C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Razor\Views\Main\CreateCoach.g.cshtml.cs
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Razor\Views\Main\CreateTest.g.cshtml.cs
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Razor\Views\Main\CreateUser.g.cshtml.cs
 C:\Users\varshesh\Desktop\Sports\Sports\obj\Debug\netcoreapp2.1\Razor\Views\Main\Dashboard.g.cshtml.cs

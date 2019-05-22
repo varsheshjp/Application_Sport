@@ -14,12 +14,12 @@ namespace Sports.Controllers
 
     public class MainController : Controller
     {
-        private IDatabase data;
+        private IDatabase Data;
         private SignInManager<ApplicationUser> _signManager;
         private UserManager<ApplicationUser> _userManager;
-        public MainController(IDatabase data,UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
+        public MainController(IDatabase Data,UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
         {
-            this.data = data;
+            this.Data = Data;
             _userManager = userManager;
             _signManager = signManager;
         }
@@ -61,6 +61,10 @@ namespace Sports.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public IActionResult Login() {
+            return RedirectToAction("Index", "Main");
+        }
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -74,7 +78,7 @@ namespace Sports.Controllers
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         Console.WriteLine("We goes here--varshesh-------------------->>>>>");
-                        return Redirect(model.ReturnUrl);
+                        return RedirectToAction("Index", "Main");
                     }
                     else
                     {
@@ -83,7 +87,7 @@ namespace Sports.Controllers
                 }
             }
             ModelState.AddModelError("", "Invalid login attempt");
-            return View(model);
+            return RedirectToAction("Index", "Main");
         }
 
         [HttpGet]
@@ -93,15 +97,13 @@ namespace Sports.Controllers
             return RedirectToAction("Index", "Main");
         }
         
-
-
         //no need of model
         public async Task<IActionResult> DeleteTest(int Id) {
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            await this.data.DeleteTest(Id);
+            await this.Data.DeleteTest(Id);
             return RedirectToAction("Dashboard", "Main");
         }
         public async Task<IActionResult> DeleteUser(int Id) {
@@ -109,7 +111,7 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            await this.data.DeleteAthlete(Id);
+            await this.Data.DeleteAthlete(Id);
             return RedirectToAction("AthleteList", "Main");
         }
 
@@ -121,8 +123,8 @@ namespace Sports.Controllers
                 return RedirectToAction("LogOut", "Main");
             }
             var model = new AddAthleteModel();
-            var list = await this.data.GetAllAthlete();
-            model.athletes = list;
+            var AthleteList = await this.Data.GetAllAthlete();
+            model.athletes = AthleteList;
             model.testid = Id;
             return View(model);
         }
@@ -132,7 +134,7 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            await this.data.AddAthleteToTest(new Athlete { TestId= model.athlete.TestId,Result= model.athlete.Result,UserId= model.athlete.UserId});
+            await this.Data.AddAthleteToTest(new Athlete { TestId= model.athlete.TestId,Result= model.athlete.Result,UserId= model.athlete.UserId});
             return RedirectToAction("DetailTest", "Main",new { Id= model.athlete.TestId});
         }
         public async Task<IActionResult> AthleteList()
@@ -141,7 +143,7 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            var list = await this.data.GetAllAthlete();
+            var list = await this.Data.GetAllAthlete();
             var model = new AthleteListModel() { users = list };
             return View(model);
         }
@@ -165,7 +167,7 @@ namespace Sports.Controllers
                 return RedirectToAction("Logout", "Main");
             }
             Test testi = model.test;
-            await this.data.AddTest(testi);
+            await this.Data.AddTest(testi);
             return RedirectToAction("Dashboard", "Main");
         }
         [HttpGet]
@@ -184,7 +186,7 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("Logout", "Main");
             }
-            await this.data.AddUser(user);
+            await this.Data.AddUser(user);
             return RedirectToAction("AthleteList", "Main");
         }
         public async Task<IActionResult> Dashboard()
@@ -194,7 +196,7 @@ namespace Sports.Controllers
                 return RedirectToAction("Logout", "Main");
             }
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var testList = await this.data.GetAllTest(currentUser.Id);
+            var testList = await this.Data.GetAllTest(currentUser.Id);
             var model = new DashboardModel() { testList = testList };
             return View(model);
         }
@@ -204,12 +206,12 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var test = await this.data.GetTest(Id);
-            var list = await this.data.GetAllAthleteInGivenTest(Id);
+            var test = await this.Data.GetTest(Id);
+            var list = await this.Data.GetAllAthleteInGivenTest(Id);
             var userList = new List<UserResult>();
             foreach (var athlete in list)
             {
-                var newData = new UserResult() { Id = athlete.Id, Name = (await this.data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
+                var newData = new UserResult() { Id = athlete.Id, Name = (await this.Data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
                 userList.Add(newData);
             }
             var model = new DetailTestModel() { test = test, athletes = userList };
@@ -221,8 +223,8 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var athlete = await this.data.GetAthlete(Id);
-            var model = new UserResult() { Id = athlete.Id, Name = (await this.data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
+            var athlete = await this.Data.GetAthlete(Id);
+            var model = new UserResult() { Id = athlete.Id, Name = (await this.Data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
             
             return View(model);
         }
@@ -232,8 +234,8 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var athlete = await this.data.GetAthlete(model.Id);
-            await this.data.EditResult(model.Id, model.Result);
+            var athlete = await this.Data.GetAthlete(model.Id);
+            await this.Data.EditResult(model.Id, model.Result);
             return RedirectToAction("DetailTest", "Main", new { Id = athlete.TestId });
         }
         [HttpGet]
@@ -242,8 +244,8 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var athlete = await this.data.GetAthlete(Id);
-            await this.data.DeleteAthleteFromTest(Id);
+            var athlete = await this.Data.GetAthlete(Id);
+            await this.Data.DeleteAthleteFromTest(Id);
             return RedirectToAction("DetailTest", "Main", new { Id = athlete.TestId });
         }
         [HttpGet]
@@ -253,7 +255,7 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var model = await this.data.GetTest(Id);
+            var model = await this.Data.GetTest(Id);
             return View(model);
         }
         [HttpPost]
@@ -263,7 +265,7 @@ namespace Sports.Controllers
             {
                 return RedirectToAction("Logout", "Main");
             }
-            await this.data.EditTest(test);
+            await this.Data.EditTest(test);
             return RedirectToAction("Dashboard", "Main");
         }
 
