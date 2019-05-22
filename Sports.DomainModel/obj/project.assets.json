@@ -4546,11 +4546,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.DomainModel\\Sports.DomainModel.csproj",
+      "projectUniqueName": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.DomainModel\\Sports.DomainModel.csproj",
       "projectName": "Sports.DomainModel",
-      "projectPath": "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.DomainModel\\Sports.DomainModel.csproj",
+      "projectPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.DomainModel\\Sports.DomainModel.csproj",
       "packagesPath": "C:\\Users\\varshesh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.DomainModel\\obj\\",
+      "outputPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.DomainModel\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

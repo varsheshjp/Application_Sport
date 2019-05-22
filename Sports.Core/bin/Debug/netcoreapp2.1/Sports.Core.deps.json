@@ -11,7 +11,8 @@
           "Microsoft.AspNetCore": "2.1.1",
           "Microsoft.AspNetCore.Mvc": "2.1.1",
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
-          "Sports.DomainModel": "1.0.0"
+          "Sports.DomainModel": "1.0.0",
+          "Sports.Repository": "1.0.0"
         },
         "runtime": {
           "Sports.Core.dll": {}
@@ -2327,6 +2328,14 @@
         "runtime": {
           "Sports.DomainModel.dll": {}
         }
+      },
+      "Sports.Repository/1.0.0": {
+        "dependencies": {
+          "Sports.DomainModel": "1.0.0"
+        },
+        "runtime": {
+          "Sports.Repository.dll": {}
+        }
       }
     }
   },
@@ -3744,6 +3753,11 @@
       "hashPath": "system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
     },
     "Sports.DomainModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sports.Repository/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

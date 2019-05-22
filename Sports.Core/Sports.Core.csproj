@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sports.Repository\Sports.Repository.csproj" />
     <ProjectReference Include="..\Sports.DomainModel\Sports.DomainModel.csproj" />
   </ItemGroup>
 

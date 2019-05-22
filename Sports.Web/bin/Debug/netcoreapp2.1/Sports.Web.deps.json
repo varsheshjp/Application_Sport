@@ -692,7 +692,8 @@
           "Microsoft.AspNetCore": "2.1.1",
           "Microsoft.AspNetCore.Mvc": "2.1.1",
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
-          "Sports.DomainModel": "1.0.0"
+          "Sports.DomainModel": "1.0.0",
+          "Sports.Repository": "1.0.0"
         },
         "runtime": {
           "Sports.Core.dll": {}
@@ -715,6 +716,17 @@
         },
         "compile": {
           "Sports.DomainModel.dll": {}
+        }
+      },
+      "Sports.Repository/1.0.0": {
+        "dependencies": {
+          "Sports.DomainModel": "1.0.0"
+        },
+        "runtime": {
+          "Sports.Repository.dll": {}
+        },
+        "compile": {
+          "Sports.Repository.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3841,6 +3853,11 @@
       "sha512": ""
     },
     "Sports.DomainModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sports.Repository/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

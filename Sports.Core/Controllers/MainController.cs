@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sports.DomainModel;
 using Sports.DomainModel.Models;
+using Sports.Repository;
 
 namespace Sports.Core
 {
@@ -17,13 +18,16 @@ namespace Sports.Core
         private readonly IDatabase _Data;
         private readonly SignInManager<ApplicationUser> _signManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ITestManager _testManager;
+        private readonly IAthleteManager _athleteManager;
         public MainController(IDatabase Data,UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
         {
             this._Data = Data;
             _userManager = userManager;
             _signManager = signManager;
+            this._testManager = new TestManager(_Data);
+            this._athleteManager = new AthleteManager(_Data);
         }
-
         public IActionResult Index(string returnUrl = "")
         {
             if (User.Identity.IsAuthenticated)
@@ -89,7 +93,6 @@ namespace Sports.Core
             ModelState.AddModelError("", "Invalid login attempt");
             return RedirectToAction("Index", "Main");
         }
-
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
@@ -103,7 +106,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            await this._Data.DeleteTest(Id);
+            await this._testManager.DeleteTest(Id);
             return RedirectToAction("Dashboard", "Main");
         }
         public async Task<IActionResult> DeleteUser(int Id) {
@@ -111,7 +114,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            await this._Data.DeleteAthlete(Id);
+            await this._athleteManager.DeleteAthlete(Id);
             return RedirectToAction("AthleteList", "Main");
         }
 
@@ -122,10 +125,8 @@ namespace Sports.Core
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            var model = new AddAthleteModel();
-            var athleteList = await this._Data.GetAllAthlete();
-            model.athletes = athleteList;
-            model.testid = Id;
+            var model = await this._athleteManager.GetAthletes(Id);
+            
             return View(model);
         }
         [HttpPost]
@@ -134,7 +135,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            await this._Data.AddAthleteToTest(new Athlete { TestId= model.athlete.TestId,Result= model.athlete.Result,UserId= model.athlete.UserId});
+            await this._athleteManager.AddAthleteToTest(model);
             return RedirectToAction("DetailTest", "Main",new { Id= model.athlete.TestId});
         }
         public async Task<IActionResult> AthleteList()
@@ -143,8 +144,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("LogOut", "Main");
             }
-            var athleteList = await this._Data.GetAllAthlete();
-            var model = new AthleteListModel() { users = athleteList };
+            var model = await this._athleteManager.GetAllAthlete();
             return View(model);
         }
         
@@ -167,7 +167,7 @@ namespace Sports.Core
                 return RedirectToAction("Logout", "Main");
             }
             Test test = model.test;
-            await this._Data.AddTest(test);
+            await this._testManager.CreateTest(test);
             return RedirectToAction("Dashboard", "Main");
         }
         [HttpGet]
@@ -186,7 +186,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("Logout", "Main");
             }
-            await this._Data.AddUser(user);
+            await this._athleteManager.AddAthlete(user);
             return RedirectToAction("AthleteList", "Main");
         }
         public async Task<IActionResult> Dashboard()
@@ -196,8 +196,7 @@ namespace Sports.Core
                 return RedirectToAction("Logout", "Main");
             }
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var testList = await this._Data.GetAllTest(currentUser.Id);
-            var model = new DashboardModel() { testList = testList };
+            var model = await this._testManager.GetTestList(currentUser.Id);
             return View(model);
         }
         public async Task<IActionResult> DetailTest(int Id)
@@ -206,15 +205,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var test = await this._Data.GetTest(Id);
-            var athleteList = await this._Data.GetAllAthleteInGivenTest(Id);
-            var userList = new List<UserResult>();
-            foreach (var athlete in athleteList)
-            {
-                var new_Data = new UserResult() { Id = athlete.Id, Name = (await this._Data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
-                userList.Add(new_Data);
-            }
-            var model = new DetailTestModel() { test = test, athletes = userList };
+            var model = await this._testManager.GetTestDetails(Id);
             return View(model);
         }
         [HttpGet]
@@ -223,9 +214,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var athlete = await this._Data.GetAthlete(Id);
-            var model = new UserResult() { Id = athlete.Id, Name = (await this._Data.GetUser(athlete.UserId)).Name, Result = athlete.Result };
-            
+            var model = await this._athleteManager.GetAthleteResult(Id);
             return View(model);
         }
         [HttpPost]
@@ -234,9 +223,8 @@ namespace Sports.Core
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var athlete = await this._Data.GetAthlete(model.Id);
-            await this._Data.EditResult(model.Id, model.Result);
-            return RedirectToAction("DetailTest", "Main", new { Id = athlete.TestId });
+            var id= await this._athleteManager.EditAthleteResult(model);
+            return RedirectToAction("DetailTest", "Main", new { Id = id });
         }
         [HttpGet]
         public async Task<IActionResult> DeleteAthleteFromTest(int Id) {
@@ -244,9 +232,8 @@ namespace Sports.Core
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var athlete = await this._Data.GetAthlete(Id);
-            await this._Data.DeleteAthleteFromTest(Id);
-            return RedirectToAction("DetailTest", "Main", new { Id = athlete.TestId });
+            var id = await this._athleteManager.DeleteAthleteFromTest(Id);
+            return RedirectToAction("DetailTest", "Main", new { Id = id });
         }
         [HttpGet]
         public async Task<IActionResult> EditTest(int Id)
@@ -255,7 +242,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("Logout", "Main");
             }
-            var model = await this._Data.GetTest(Id);
+            var model = await this._testManager.GetTest(Id);
             return View(model);
         }
         [HttpPost]
@@ -265,7 +252,7 @@ namespace Sports.Core
             {
                 return RedirectToAction("Logout", "Main");
             }
-            await this._Data.EditTest(test);
+            await this._testManager.EditTest(test);
             return RedirectToAction("Dashboard", "Main");
         }
 

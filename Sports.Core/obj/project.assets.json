@@ -3156,6 +3156,19 @@
         "runtime": {
           "bin/placeholder/Sports.DomainModel.dll": {}
         }
+      },
+      "Sports.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Sports.DomainModel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Sports.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Sports.Repository.dll": {}
+        }
       }
     }
   },
@@ -9135,6 +9148,11 @@
       "type": "project",
       "path": "../Sports.DomainModel/Sports.DomainModel.csproj",
       "msbuildProject": "../Sports.DomainModel/Sports.DomainModel.csproj"
+    },
+    "Sports.Repository/1.0.0": {
+      "type": "project",
+      "path": "../Sports.Repository/Sports.Repository.csproj",
+      "msbuildProject": "../Sports.Repository/Sports.Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -9143,7 +9161,8 @@
       "Microsoft.AspNetCore.Mvc >= 2.1.1",
       "Microsoft.AspNetCore.Mvc.Core >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Sports.DomainModel >= 1.0.0"
+      "Sports.DomainModel >= 1.0.0",
+      "Sports.Repository >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -9153,11 +9172,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.Core\\Sports.Core.csproj",
+      "projectUniqueName": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Core\\Sports.Core.csproj",
       "projectName": "Sports.Core",
-      "projectPath": "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.Core\\Sports.Core.csproj",
+      "projectPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Core\\Sports.Core.csproj",
       "packagesPath": "C:\\Users\\varshesh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.Core\\obj\\",
+      "outputPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -9176,8 +9195,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.DomainModel\\Sports.DomainModel.csproj": {
-              "projectPath": "C:\\Users\\varshesh\\Desktop\\Structured_sports\\Sports.DomainModel\\Sports.DomainModel.csproj"
+            "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.DomainModel\\Sports.DomainModel.csproj": {
+              "projectPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.DomainModel\\Sports.DomainModel.csproj"
+            },
+            "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Repository\\Sports.Repository.csproj": {
+              "projectPath": "C:\\Users\\varshesh\\Desktop\\Sports\\Sports.Repository\\Sports.Repository.csproj"
             }
           }
         }
