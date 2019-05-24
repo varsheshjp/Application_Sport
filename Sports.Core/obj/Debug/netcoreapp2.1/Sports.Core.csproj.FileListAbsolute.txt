@@ -24,3 +24,7 @@ C:\Users\varshesh\Desktop\Sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core
 C:\Users\varshesh\Desktop\Sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.csproj.CopyComplete
 C:\Users\varshesh\Desktop\Sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.dll
 C:\Users\varshesh\Desktop\Sports\Sports.Core\obj\Debug\netcoreapp2.1\Sports.Core.pdb
+C:\Users\varshesh\Desktop\Sports\Sports.Core\bin\Debug\netcoreapp2.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\varshesh\Desktop\Sports\Sports.Core\bin\Debug\netcoreapp2.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\varshesh\Desktop\Sports\Sports.Core\bin\Debug\netcoreapp2.1\Microsoft.IdentityModel.Tokens.xml
+C:\Users\varshesh\Desktop\Sports\Sports.Core\bin\Debug\netcoreapp2.1\System.IdentityModel.Tokens.Jwt.xml

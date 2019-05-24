@@ -12,7 +12,9 @@
           "Microsoft.AspNetCore.Mvc": "2.1.1",
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
           "Sports.DomainModel": "1.0.0",
-          "Sports.Repository": "1.0.0"
+          "Sports.Repository": "1.0.0",
+          "Microsoft.IdentityModel.Tokens": "5.2.0.0",
+          "System.IdentityModel.Tokens.Jwt": "5.2.0.0"
         },
         "runtime": {
           "Sports.Core.dll": {}
@@ -2336,6 +2338,22 @@
         "runtime": {
           "Sports.Repository.dll": {}
         }
+      },
+      "Microsoft.IdentityModel.Tokens/5.2.0.0": {
+        "runtime": {
+          "Microsoft.IdentityModel.Tokens.dll": {
+            "assemblyVersion": "5.2.0.0",
+            "fileVersion": "5.2.0.50129"
+          }
+        }
+      },
+      "System.IdentityModel.Tokens.Jwt/5.2.0.0": {
+        "runtime": {
+          "System.IdentityModel.Tokens.Jwt.dll": {
+            "assemblyVersion": "5.2.0.0",
+            "fileVersion": "5.2.0.50129"
+          }
+        }
       }
     }
   },
@@ -3759,6 +3777,16 @@
     },
     "Sports.Repository/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.IdentityModel.Tokens/5.2.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.IdentityModel.Tokens.Jwt/5.2.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

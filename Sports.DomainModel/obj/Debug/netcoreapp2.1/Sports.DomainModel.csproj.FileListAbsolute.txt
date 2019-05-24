@@ -30,3 +30,4 @@ C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Spor
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.AssemblyInfo.cs
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.dll
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.pdb
+C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.csprojAssemblyReference.cache

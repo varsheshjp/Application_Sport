@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Sports.DomainModel\Sports.DomainModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="app\" />
+  </ItemGroup>
+
 </Project>

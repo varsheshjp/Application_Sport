@@ -147,7 +147,6 @@ namespace Sports.Core
             var model = await this._athleteManager.GetAllAthlete();
             return View(model);
         }
-        
         [HttpGet]
         public async Task<IActionResult> CreateTest()
         {
@@ -255,8 +254,6 @@ namespace Sports.Core
             await this._testManager.EditTest(test);
             return RedirectToAction("Dashboard", "Main");
         }
-
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
