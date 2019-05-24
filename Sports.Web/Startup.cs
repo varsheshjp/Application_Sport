@@ -12,6 +12,7 @@ using Sports.DomainModel.Models;
 using Sports.DomainModel;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Sports.Repository.ApiDataManger;
 
 namespace Sports
 {
@@ -44,6 +45,7 @@ namespace Sports
 
             services.AddEntityFrameworkSqlServer().AddDbContext<SportContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SportSite")));
             services.AddScoped<IDatabase, Database>();
+            services.AddScoped<IDataManager,DataManager>();
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<SportContext>();
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]));
             services.AddAuthentication(options =>

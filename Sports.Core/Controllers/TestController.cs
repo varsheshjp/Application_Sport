@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sports.DomainModel;
 using Sports.DomainModel.Models;
 using Sports.Repository;
+using Sports.Repository.ApiDataManger;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,165 +15,93 @@ namespace Sports.Core.Controllers
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
-    public class TestController :Controller
+    public class TestController : Controller
     {
-        private readonly IDatabase _Data;
-        private readonly ITestManager _testManager;
-        private readonly IAthleteManager _athleteManager;
-        public TestController(IDatabase Data)
+        private readonly IDataManager _dataManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public TestController(IDataManager _dataManager, UserManager<ApplicationUser> _userManager)
         {
-            this._Data = Data;
-            this._testManager = new TestManager(_Data);
-            this._athleteManager = new AthleteManager(_Data);
-        }
-        //no need of model
-        [Route("deletetest")]
-        [HttpDelete]
-        public async Task<IActionResult> DeleteTest(int Id)
-        {
-            await this._testManager.DeleteTest(Id);
-            return new JsonResult(new { result="success"});
-        }
-        [Route("deletetest")]
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUser([from]int Id)
-        {
-            await this._athleteManager.DeleteAthlete(Id);
-            return new JsonResult(new { result = "success" });
+            this._dataManager = _dataManager;
+            this._userManager = _userManager;
         }
 
-        //Model has been added in this methods  
-        [HttpGet]
-        public async Task<IActionResult> GetAthleteList(int Id)
+
+        //create api
+        [Route("createTest")]
+        [HttpPost]
+        public async Task<IActionResult> CreateTest([FromBody]Test test)//in:form body test model out:{requestType=Create respons:success or not }
+        {
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            test.CoachId = currentUser.Id;
+            var result = await _dataManager.CreatTest(test);
+            return new JsonResult(new { ResponseType = "boolean", responsData = result });
+        }
+        [Route("createUser")]
+        [HttpPost]
+        public async Task<IActionResult> CreateAthlete([FromBody] User user)//in:form body User model out:{requestType=create respons success or not}
+        {
+            var result = await _dataManager.CreateAthlete(user);
+            return new JsonResult(new { ResponsType = "boolean", responsData = result });
+        }
+
+        //add-edit-delete athlete in test
+        [Route("addAthlete")]
+        [HttpPost]
+        public async Task<IActionResult> AddNewAthleteInTest([FromBody] Athlete athlete)//in:athlete model out:{requestType:add respons:success or not}
+        {
+            var result = await _dataManager.AddNewAthleteInTest(athlete);
+            return new JsonResult(new { ResponsType = "boolean", responsData = result });
+
+        }
+        [Route("editAthlete")]
+        [HttpPost]
+        public async Task<IActionResult> EditAthleteInTest([FromBody]Athlete athlete)//in:athlete model out:{requestType:edit respons:success or not}
+        {
+            var result = await _dataManager.EditAthleteInTest(athlete);
+            return new JsonResult(new { ResponsType = "boolean", responsData = result });
+        }
+        
+        [Route("deleteAthlete")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteAthleteFromTest([FromBody]Athlete athlete)//in:athlete model out:{requestType:delete respons:success or not}
+        {
+            var result = await _dataManager.EditAthleteInTest(athlete);
+            return new JsonResult(new { ResponsType = "boolean", responsData = result });
+        }
+
+        //add-edit-delete test
+        public void DeleteTest()//in:test model out:{requestType:delete respons:success or not}
         {
 
-            var model = await this._athleteManager.GetAthletes(Id);
-            return new JsonResult(model);
         }
-        [HttpPost]
-        public async Task<IActionResult> AddAthlete(AddAthleteModel model)
+        public void EditTest()//in:test model out:{requestType:Edit respons:success or not}
         {
-            await this._athleteManager.AddAthleteToTest(model);
-            return RedirectToAction("DetailTest", "Main", new { Id = model.athlete.TestId });
+
         }
-        public async Task<IActionResult> AthleteList()
+        public void AddNewTest()//in:test model out:{requestType:add respons:success or not}
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("LogOut", "Main");
-            }
-            var model = await this._athleteManager.GetAllAthlete();
-            return View(model);
+
         }
-        [HttpGet]
-        public async Task<IActionResult> CreateTest()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var model = new CreateTestModel() { userid = currentUser.Id };
-            return View(model);
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateTest(CreateTestModel model)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            Test test = model.test;
-            await this._testManager.CreateTest(test);
-            return RedirectToAction("Dashboard", "Main");
-        }
-        [HttpGet]
-        public IActionResult CreateUser()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateUser(User user)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            await this._athleteManager.AddAthlete(user);
-            return RedirectToAction("AthleteList", "Main");
-        }
-        public async Task<IActionResult> Dashboard()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var model = await this._testManager.GetTestList(currentUser.Id);
-            return View(model);
-        }
-        public async Task<IActionResult> DetailTest(int Id)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            var model = await this._testManager.GetTestDetails(Id);
-            return View(model);
-        }
-        [HttpGet]
-        public async Task<IActionResult> EditResultTest(int Id)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            var model = await this._athleteManager.GetAthleteResult(Id);
-            return View(model);
-        }
-        [HttpPost]
-        public async Task<IActionResult> EditResultTest(UserResult model)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            var id = await this._athleteManager.EditAthleteResult(model);
-            return RedirectToAction("DetailTest", "Main", new { Id = id });
-        }
-        [HttpGet]
-        public async Task<IActionResult> DeleteAthleteFromTest(int Id)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            var id = await this._athleteManager.DeleteAthleteFromTest(Id);
-            return RedirectToAction("DetailTest", "Main", new { Id = id });
-        }
-        [HttpGet]
-        public async Task<IActionResult> EditTest(int Id)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            var model = await this._testManager.GetTest(Id);
-            return View(model);
-        }
-        [HttpPost]
-        public async Task<IActionResult> EditTest(Test test)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
-            await this._testManager.EditTest(test);
-            return RedirectToAction("Dashboard", "Main");
-        }
+
+        //get Test
+        public void GetTestById()//in:test id int out:{requestType:getSingle respons:Test model by id}
+        { }
+        public void GetTestList()//in:void out:{requestType:getAll respons:list of Test model }
+        { }
+
+        //get Athlete from test
+        public void GetAthleteByTestId()//in:test id int out:{requestType:getSelected respons:list of Athlete model by id}
+        { }
+        public void GetAthleteByAthleteId()//in:athlete id int out:{requestType:getSelected respons:Athlete model by id}
+        { }
+
+        //get Athlete as User
+        public void GetAllUser()//in:void out:{requestType:getAll respons:List of all User model}
+        { }
+
+        //add-delete Athlete as user
+        public void DeleteUser()//in:UserId out:{requestType:Delete respons:success or not}
+        { }
+       
     }
 }
