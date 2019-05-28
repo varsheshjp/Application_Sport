@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Dashboard</h2>
+    <div class="table" *ngIf="testList.length>0">
+        <table class="table table-hover">
+            <tr>
+                <th>Creation Date(yyyy-mm-dd)</th>
+                <th>Number of Participant</th>
+                <th>Test Type</th>
+                <th>Edit test</th>
+                <th>Details</th>
+                <th>Delete</th>
+            </tr>
+            <tr *ngFor="let test of testList">
+                <td>{{test.date}}</td>
+                <td>{{test.number}}</td>
+                <td>{{test.type}}</td>
+                <td><button (click)="EditTest(test)" class="btn btn-primary">Edit</button></td>
+                <td><button (click)="ViewTest(test)" class="btn btn-primary">View</button></td>
+                <td><button  (click)="DeleteTest(test)" class="btn btn-primary">Delete</button></td>
+            </tr>
+            
+        </table>
+    </div>
+    <h3 *ngIf="testList.length==0" >No records Found</h3>
+    <div>
+        <button style="margin:10px" class="btn btn-primary" (click)="CreateTest()">Create Test</button>
+        <a routerLink="/User" class="btn btn-primary">Athlete List</a>
+        <button style="margin:10px" class="btn btn-danger" (click)="Logout()">LogOut</button>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container">
+    <h1>{{test.type}}:{{test.date}}</h1>
+    <div class="table" *ngIf="athleteList.length>0">
+        <table class="table">
+            <tr>
+                <th>Athlete Name</th>
+                <th>Athlete Result</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr *ngFor="let athlete of athleteList">
+                <td>{{athlete.name}}</td>
+                <td>{{athlete.result}}</td>
+                <td><button (click)="Edit(athlete)" class="btn btn-primary">Edit</button></td>
+                <td><button (click)="Delete(athlete)" class="btn btn-primary">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+    <h3 *ngIf="athleteList.length==0">No records Found</h3>
+    <div>
+        <button (click)="Add()" class="btn btn-primary">Add Athlete</button>
+        <a [routerLink]="['/Dashboard']" class="btn btn-primary">Back To Dashboard</a>
+    </div>
+</div>

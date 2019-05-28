@@ -1,0 +1,23 @@
+<div class="container" style="margin:10px">
+    <h2>Create Test</h2>
+    <div>
+        <form method="post">
+            <div class="form-group">
+                <label for="Date">Test Date</label>
+                <input type="date" id="Date" [(ngModel)]="test.date" [ngModelOptions]="{standalone: true}" class="form-control" >
+                <p id="name" style="color:red"></p>
+            </div>
+            <div class="form-group">
+                <label for="Type">Test Type</label>
+                <select id="Type" [(ngModel)]="test.type" [ngModelOptions]="{standalone: true}" class="form-control custom-select" >
+                    <option value="null" selected disabled>--select--</option>
+                    <option value="Coopertest">Coopertest</option>
+                    <option value="100 meter sprint">100 meter sprint</option>
+                </select>
+                <p id="list" style="color:red"></p>
+            </div>
+            <button id="submit" (click)="CreateTest()"  class="btn btn-primary">Create</button>
+            <a [routerLink]="['/Dashboard']"  class="btn btn-primary">Cancel</a>
+        </form>
+    </div>
+</div>

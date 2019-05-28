@@ -1,0 +1,21 @@
+
+<div class="container">
+        <div class="form-horizontal">
+            <form >
+                <div class="form-group">
+                    <label for="UserId">Select Athlete</label>
+                    <select id="UserId" [(ngModel)]="athlete.userId" name="name" class="form-control">
+                        <option value="-1">--select--</option>
+                        <option  *ngFor="let user of userList"  value="{{user.id}}">{{user.name}}</option>
+                        
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Result">Enter Result</label>
+                    <input type="number" [(ngModel)]="athlete.result" name="result" id="Result"/>
+                </div>
+                <button (click)="AddAthlete()" class="btn btn-primary">Add</button>
+                <a [routerLink]='["/detail"]' class="btn btn-primary">Cancel</a>
+            </form>
+        </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="table" *ngIf="userList.length>0">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Delete</th>
+            </tr>
+            <tr *ngFor="let user of userList">
+                <td>{{user.name}}</td>
+                <td><button  (click)="Delete(user)" class="btn btn-danger">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+    <h3 *ngIf="userList.length==0">No records Found</h3>
+    <div>
+        <a [routerLink]="['/createUser']" class="btn btn-primary">Create New Athlete</a>
+        <a [routerLink]="['/Dashboard']" class="btn btn-danger">Back to Dashboard</a>
+    </div>
+</div>
