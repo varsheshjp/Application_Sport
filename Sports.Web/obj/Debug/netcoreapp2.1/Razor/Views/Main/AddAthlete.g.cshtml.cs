@@ -93,17 +93,17 @@ using Sports.DomainModel;
             WriteLiteral("        <div class=\"form-horizontal\">\n            ");
             EndContext();
             BeginContext(271, 1105, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e776d5205844d69bdaddf3ae2b28377", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dd33dcb239474b7ca6dfc4ef8fc2091c", async() => {
                 BeginContext(337, 125, true);
                 WriteLiteral("\n                <div class=\"form-group\">\n                    <label for=\"UserId\">Select Athlete</label>\n                    ");
                 EndContext();
                 BeginContext(462, 338, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8c4c4ae315d4636aa4ff4696284978f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "822e46de777a484c86a79cd94ae6a933", async() => {
                     BeginContext(550, 25, true);
                     WriteLiteral("\n                        ");
                     EndContext();
                     BeginContext(575, 38, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4afeea845477420992b38a1cadd47732", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ee53a2e95e244dec8d3dbec9679b67af", async() => {
                         BeginContext(594, 10, true);
                         WriteLiteral("--select--");
                         EndContext();
@@ -133,7 +133,7 @@ using Sports.DomainModel;
                     WriteLiteral("                            ");
                     EndContext();
                     BeginContext(700, 44, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a955ac7376ec47caad76004ca81e9cc5", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bc747486b2a848af8b5ffd57becf9279", async() => {
                         BeginContext(726, 9, false);
 #line 18 "C:\Users\varshesh\Desktop\Sports\Sports.Web\Views\Main\AddAthlete.cshtml"
                                                 Write(user.Name);
@@ -199,7 +199,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_SelectTagHelper.For = ModelExpressionProvi
                 WriteLiteral("\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"Result\">Enter Result</label>\n                    ");
                 EndContext();
                 BeginContext(946, 81, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "afe7200b43cc41d8a917f9cf2eeea7be", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "3b8d2919f49244a987446bcf34a11b1e", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -227,7 +227,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\n                    ");
                 EndContext();
                 BeginContext(1048, 86, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "598624af2730447796b6c699698dff87", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "cc546e4338b54ca5883f0f96565b4cb7", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -263,7 +263,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\n                </div>\n                <button input=\"submit\" class=\"btn btn-primary\">Add</button>\n                ");
                 EndContext();
                 BeginContext(1250, 106, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b62a2be87ac14776a180a1b2407a7b1e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "824046057bf649f98d004f48ed8065be", async() => {
                     BeginContext(1346, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();
@@ -334,7 +334,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
             WriteLiteral("        <h2>No Athlete found. Please add Athlete first in \"Athletes\" section </h2>\n        ");
             EndContext();
             BeginContext(1504, 120, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cbba86b6833d404c9e6b9155e4b54a88", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aa405e38befe4006b1152ee9caa5670c", async() => {
                 BeginContext(1600, 20, true);
                 WriteLiteral("Back To Test Details");
                 EndContext();

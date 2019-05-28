@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace Sports.Core.Controllers
 {
+    
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -28,9 +30,10 @@ namespace Sports.Core.Controllers
             this._userManager = _userManager;
             this._configuration = _configuration;
         }
+        
         [HttpPost]
         [Route("token")]
-        public async Task<IActionResult> CreateToken([FromBody] LoginViewModel loginModel)
+        public async Task<IActionResult> CreateToken(LoginViewModel loginModel)
         {
             if (ModelState.IsValid)
             {
@@ -48,6 +51,7 @@ namespace Sports.Core.Controllers
             return new JsonResult(new { loginResult = "fail", token = "" });
 
         }
+        
         [Authorize]
         [HttpPost]
         [Route("refreshtoken")]
@@ -59,10 +63,11 @@ namespace Sports.Core.Controllers
                 );
             return Ok(GetToken(user));
         }
+        
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {

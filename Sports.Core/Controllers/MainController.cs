@@ -190,10 +190,10 @@ namespace Sports.Core
         }
         public async Task<IActionResult> Dashboard()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Logout", "Main");
-            }
+            //if (!User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Logout", "Main");
+            //}
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
             var model = await this._testManager.GetTestList(currentUser.Id);
             return View(model);

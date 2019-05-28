@@ -13,6 +13,7 @@ using Sports.DomainModel;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Sports.Repository.ApiDataManger;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace Sports
 {
@@ -28,13 +29,14 @@ namespace Sports
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options => options.AddPolicy("Cors", builder =>
+            services.AddCors(options =>
             {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            }));
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -59,7 +61,7 @@ namespace Sports
                 config.TokenValidationParameters = new TokenValidationParameters()
                 {
                     IssuerSigningKey = signingKey,
-                    ValidateAudience = true,
+                    ValidateAudience = false,
                     ValidAudience = this.Configuration["Tokens:Audience"],
                     ValidateIssuer = true,
                     ValidIssuer = this.Configuration["Tokens:Issuer"],
@@ -71,6 +73,10 @@ namespace Sports
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("CorsPolicy"));
+            });
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
@@ -79,6 +85,9 @@ namespace Sports
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+           
+           
+            app.UseCors("CorsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -88,7 +97,6 @@ namespace Sports
                 app.UseExceptionHandler("/Main/Error");
                 app.UseHsts();
             }
-            app.UseCors("Cors");
             app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -25,9 +25,9 @@ C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\bin\Debug\netcoreapp2.1\Spor
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\bin\Debug\netcoreapp2.1\Sports.DomainModel.runtimeconfig.dev.json
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\bin\Debug\netcoreapp2.1\Sports.DomainModel.dll
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\bin\Debug\netcoreapp2.1\Sports.DomainModel.pdb
+C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.csprojAssemblyReference.cache
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.csproj.CoreCompileInputs.cache
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.AssemblyInfoInputs.cache
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.AssemblyInfo.cs
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.dll
 C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.pdb
-C:\Users\varshesh\Desktop\Sports\Sports.DomainModel\obj\Debug\netcoreapp2.1\Sports.DomainModel.csprojAssemblyReference.cache
