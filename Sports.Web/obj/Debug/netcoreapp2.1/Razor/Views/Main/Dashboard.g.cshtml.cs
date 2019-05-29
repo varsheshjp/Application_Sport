@@ -131,7 +131,7 @@ using Sports.DomainModel;
             WriteLiteral("</th>\r\n                        <th>");
             EndContext();
             BeginContext(865, 103, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c952356844b846a8ba724fd2e192162e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "415b559f93f9449db33ec467c3e774d7", async() => {
                 BeginContext(960, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -169,7 +169,7 @@ using Sports.DomainModel;
             WriteLiteral("</th>\r\n                        <th>");
             EndContext();
             BeginContext(1003, 105, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7289e634397540f2bbce3f3e388f4ec3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "afd3018cc8a14592aeb6214c48d3ae89", async() => {
                 BeginContext(1100, 4, true);
                 WriteLiteral("View");
                 EndContext();
@@ -207,7 +207,7 @@ using Sports.DomainModel;
             WriteLiteral("</th>\r\n                        <th>");
             EndContext();
             BeginContext(1143, 107, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bdae439186a241398a7aeb78cebf3cd8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3d36b41c6a68457ab140afdf858f37a9", async() => {
                 BeginContext(1240, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -271,7 +271,7 @@ using Sports.DomainModel;
             WriteLiteral("    <div>\r\n        ");
             EndContext();
             BeginContext(1426, 88, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4da560154d4598b4ac0d9db42cdd51", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "00822f6a4fae4eab9187a8e874835c56", async() => {
                 BeginContext(1499, 11, true);
                 WriteLiteral("Create Test");
                 EndContext();
@@ -296,7 +296,7 @@ using Sports.DomainModel;
             WriteLiteral("\r\n        ");
             EndContext();
             BeginContext(1524, 92, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1760eec4151b493a851d16b8b4b7600c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cad5ec294137494996651c2fa470774f", async() => {
                 BeginContext(1606, 6, true);
                 WriteLiteral("LogOut");
                 EndContext();

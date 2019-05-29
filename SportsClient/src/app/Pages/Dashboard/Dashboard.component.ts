@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit{
     }
     EditTest(test:Test){
         this._localSate.setTest(test);
-        this._router.navigate(["/edit"]);
+        this._router.navigate(["/editTest"]);
     }
     Logout(){
         sessionStorage.removeItem("token");

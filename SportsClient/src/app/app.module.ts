@@ -15,6 +15,9 @@ import { CreateTestComponent } from './Pages/CreateTest/CreateTest.component';
 import { CreatUserComponent } from './Pages/CreateUser/CreateUser.component';
 import { UserComponent } from './Pages/Users/User.component';
 import { AddAthleteComponent } from './Pages/AddAthlete/AddAthlete.component';
+import { RegisterComponent } from './Pages/Registration/Register.component';
+import { EditUserComponent } from './Pages/EditUser/EditUser.component';
+import { EditTestComponent } from './Pages/EditTest/EditTest.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { AddAthleteComponent } from './Pages/AddAthlete/AddAthlete.component';
     CreateTestComponent,
     CreatUserComponent,
     UserComponent,
-    AddAthleteComponent
+    AddAthleteComponent,
+    RegisterComponent,
+    EditUserComponent,
+    EditTestComponent
   ],
   imports: [
     BrowserModule,

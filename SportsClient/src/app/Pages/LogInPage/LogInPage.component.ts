@@ -8,32 +8,42 @@ import { LogInModel } from '../../Models/LogIn';
   selector: 'app-Log-In',
   templateUrl: './LogInPage.component.html'
 })
-export class LogInComponent implements OnInit{
+export class LogInComponent implements OnInit {
   title = 'Log In';
-  public logIn:LogInModel;
-  public Username:string;
-  public Password:string;
-  constructor(private _api:RestApiService,private _router: Router){
-    this.logIn=new LogInModel();
-    let token=sessionStorage.getItem("token");
-    if(token!=null){
+  public logIn: LogInModel;
+  public Username: string;
+  public Password: string;
+  public error: string;
+  constructor(private _api: RestApiService, private _router: Router) {
+    this.logIn = new LogInModel();
+    let token = sessionStorage.getItem("token");
+    if (token != null) {
       this._router.navigate(['/Dashboard']);
     }
+    this.error = "";
   }
   ngOnInit(): void {
   }
-  public LogInButton(){
-    console.log(this.logIn);
-    this._api.postLogin(this.logIn).subscribe((data)=>{
-      if(data.loginResult=="fail"){
-        sessionStorage.setItem("token",null);
-        console.log("fail");
-      }
-      else if(data.loginResult=="success"){
-        sessionStorage.setItem("token",data.token);
-        console.log(data.token);
-        this._router.navigate(['/Dashboard']);
-      }
-    });
+  public LogInButton() {
+    if (this.logIn.Password == null || this.logIn.Password == "") {
+      this.error = "Password and Username must not be empty";
+    }
+    else if (this.logIn.Username == null || this.logIn.Username == "") {
+      this.error = "Password and Username must not be empty";
+    }
+    else {
+      this._api.postLogin(this.logIn).subscribe((data) => {
+        if (data.loginResult == "fail") {
+          sessionStorage.setItem("token", null);
+          this.error = "Invalid Username or Password";
+          console.log("fail");
+        }
+        else if (data.loginResult == "success") {
+          sessionStorage.setItem("token", data.token);
+          console.log(data.token);
+          this._router.navigate(['/Dashboard']);
+        }
+      });
+    }
   }
 }

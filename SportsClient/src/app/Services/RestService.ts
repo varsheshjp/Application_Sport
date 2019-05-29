@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { Athlete } from '../Models/Athlete';
 import { ResponseBoolean } from '../Models/ResponseBoolean';
 import { User } from '../Models/User';
+import { Register } from '../Models/Register';
 import {
     HttpEvent,
     HttpInterceptor,
@@ -77,7 +78,6 @@ export class RestApiService {
             })
         );
     }
-    
     getUsersList():Observable<User[]>{
         return this.http.get<User[]>(endpoint+"Test/getAthleteList",{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem("token")})}).pipe(
             catchError(err => {
@@ -96,6 +96,25 @@ export class RestApiService {
     }
     createUser(user:User):Observable<ResponseBoolean>{
         return this.http.post<ResponseBoolean>(endpoint + "Test/CreateUser",{Name:user.name,Type:"Athlete"},{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem("token")})}).pipe(
+            catchError(err => {
+                sessionStorage.removeItem("token");
+                return throwError("Error thrown from catchError");
+            })
+        );
+    }
+    register(register:Register):Observable<ResponseToken>{
+        return this.http.post<ResponseToken>(endpoint + "Auth/register", {Username:register.username,Password:register.password,ConfirmPassword:register.confirmPassword}, httpOptions);
+    }
+    editUserResult(athlete:Athlete):Observable<ResponseBoolean>{
+        return this.http.post<ResponseBoolean>(endpoint + "Test/editAthlete",{Id:athlete.id,Result:athlete.result},{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem("token")})}).pipe(
+            catchError(err => {
+                sessionStorage.removeItem("token");
+                return throwError("Error thrown from catchError");
+            })
+        );
+    }
+    editTest(test:Test):Observable<ResponseBoolean>{
+        return this.http.post<ResponseBoolean>(endpoint + "Test/editTest",{Id:test.id,Date:test.date,Type:test.type},{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem("token")})}).pipe(
             catchError(err => {
                 sessionStorage.removeItem("token");
                 return throwError("Error thrown from catchError");

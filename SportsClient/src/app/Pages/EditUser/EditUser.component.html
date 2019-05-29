@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>{{athlete.name}}:</h2>
+    <form >
+        <div class="form-group">
+            <label for="Result">Edit Result</label>
+            <input [(ngModel)]="athlete.result" type="number" name="Result" id="Result" value="{{athlete.result}}" class="form-control" />
+        </div>
+        <button class="btn btn-primary" (click)="EditUser()">Save</button>
+        <a  [routerLink]="['/detail']"class="btn btn-primary">Cancel</a>
+    </form>
+</div>

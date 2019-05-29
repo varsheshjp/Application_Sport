@@ -7,6 +7,9 @@ import { CreateTestComponent } from './Pages/CreateTest/CreateTest.component';
 import { CreatUserComponent } from './Pages/CreateUser/CreateUser.component';
 import { UserComponent } from './Pages/Users/User.component';
 import { AddAthleteComponent } from './Pages/AddAthlete/AddAthlete.component';
+import { RegisterComponent } from './Pages/Registration/Register.component';
+import { EditUserComponent } from './Pages/EditUser/EditUser.component';
+import { EditTestComponent } from './Pages/EditTest/EditTest.component';
 
 const routes: Routes = [
   {path:'home',component :LogInComponent},
@@ -16,7 +19,10 @@ const routes: Routes = [
   {path:'createTest',component:CreateTestComponent},
   {path:'createUser',component:CreatUserComponent},
   {path:'User',component:UserComponent},
-  {path:'addAthlete',component:AddAthleteComponent}
+  {path:'addAthlete',component:AddAthleteComponent},
+  {path:'Register',component:RegisterComponent},
+  {path:"editResult",component:EditUserComponent},
+  {path:"editTest",component:EditTestComponent}
 ];
 
 @NgModule({

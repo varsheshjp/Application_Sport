@@ -76,7 +76,7 @@ namespace Sports.Core.Controllers
                 if (result.Succeeded)
                 {
                     await _signManager.SignInAsync(user, false);
-                    return new JsonResult(new { RegisterResult = "success", token = GetToken(user) });
+                    return new JsonResult(new { loginResult = "success", token = GetToken(user) });
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace Sports.Core.Controllers
                     }
                 }
             }
-            return  new JsonResult(new { RegisterResult = "fail", ModelState });
+            return  new JsonResult(new { loginResult = "fail", ModelState });
         }
         private String GetToken(ApplicationUser user)
         {

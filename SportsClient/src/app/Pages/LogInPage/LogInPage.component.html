@@ -1,5 +1,4 @@
-<h2>
-    Login</h2>
+<h2>Login</h2>
 <div>
     <form method="post">
 
@@ -10,11 +9,12 @@
 
         <div class="form-group">
             <label asp-for="Password">Password</label>
-            <input asp-for="Password" [(ngModel)]="logIn.Password" [ngModelOptions]="{standalone: true}" class="form-control" />
-
+            <input type="Password" asp-for="Password" [(ngModel)]="logIn.Password" [ngModelOptions]="{standalone: true}" class="form-control" />
         </div>
+        <p >{{error}}</p>
         <div>
             <button style="margin:5px" value="Login" class="btn btn-primary" (click)="LogInButton()">Log in</button>
-            <a class="btn btn-primary">Register</a></div>
+            <a [routerLink]="['/Register']" class="btn btn-primary">Register</a></div>
+            
     </form>
 </div>

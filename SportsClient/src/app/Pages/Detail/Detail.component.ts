@@ -16,19 +16,25 @@ export class DetailComponent implements OnInit {
     athleteList: Athlete[] = [];
     constructor(private _api: RestApiService, private _router: Router, private _localState: LocalSateService) { }
     ngOnInit(): void {
-        this.test = this._localState.getTest();
-        this._api.getAthleteList(this.test).subscribe((data: Athlete[]) => {
-            this.athleteList = data;
-            this._api.getUsersList().subscribe((data2) => {
-                for (let j in this.athleteList) {
-                    for (let i in data2) {
-                        if (this.athleteList[j].userId == data2[i].id) {
-                            this.athleteList[j].name = data2[i].name;
+        if (sessionStorage.getItem("token") == null) {
+            console.log("at ng on init not log in");
+            this._router.navigate(["/home"]);
+        }
+        else {
+            this.test = this._localState.getTest();
+            this._api.getAthleteList(this.test).subscribe((data: Athlete[]) => {
+                this.athleteList = data;
+                this._api.getUsersList().subscribe((data2) => {
+                    for (let j in this.athleteList) {
+                        for (let i in data2) {
+                            if (this.athleteList[j].userId == data2[i].id) {
+                                this.athleteList[j].name = data2[i].name;
+                            }
                         }
                     }
-                }
-            })
-        });
+                })
+            });
+        }
     }
     Delete(athlete: Athlete) {
 
@@ -38,6 +44,10 @@ export class DetailComponent implements OnInit {
     }
     Add() {
         this._router.navigate(["/addAthlete"]);
+    }
+    Edit(athlete: Athlete) {
+        this._localState.setAthlete(athlete);
+        this._router.navigate(["/editResult"]);
     }
 
 }
