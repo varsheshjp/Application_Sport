@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
-import { RestApiService } from '../../Services/RestService';
-import { LogInModel } from '../../Models/LogIn';
+import { RestApiService } from '../../Services/rest.service';
+import { LocalSateService } from '../../Services/localSatet.service';
+import { LogInModel } from '../../Models/logIn.model';
 
 @Component({
   selector: 'app-Log-In',
-  templateUrl: './LogInPage.component.html'
+  templateUrl: './logInPage.component.html'
 })
 export class LogInComponent implements OnInit {
   title = 'Log In';

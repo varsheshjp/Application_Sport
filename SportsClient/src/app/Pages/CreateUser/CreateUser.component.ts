@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
-import { RestApiService } from '../../Services/RestService';
-import { LogInModel } from '../../Models/LogIn';
-import { Test } from '../../Models/Test';
-import { LocalSateService } from '../../Services/LocalSatetService';
-import { ResponseBoolean } from '../../Models/ResponseBoolean';
-import { User } from '../../Models/User';
+import { RestApiService } from '../../Services/rest.service';
+import { LocalSateService } from '../../Services/localSatet.service';
+import { LogInModel } from '../../Models/logIn.model';
+import { Test } from '../../Models/test.model';
+import { ResponseBoolean } from '../../Models/responseBoolean.model';
+import { User } from '../../Models/user.model';
 
 @Component({
   selector: 'app-CreateUser',
-  templateUrl: './CreateUser.component.html'
+  templateUrl: './createUser.component.html'
 })
 export class CreatUserComponent implements OnInit{
     public user:User;

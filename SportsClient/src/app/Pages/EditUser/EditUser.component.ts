@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
-import { RestApiService } from '../../Services/RestService';
-import { LogInModel } from '../../Models/LogIn';
-import { Test } from '../../Models/Test';
-import { LocalSateService } from '../../Services/LocalSatetService';
-import { ResponseBoolean } from '../../Models/ResponseBoolean';
-import { User } from '../../Models/User';
-import { Athlete } from '../../Models/Athlete';
-
+import { RestApiService } from '../../Services/rest.service';
+import { LocalSateService } from '../../Services/localSatet.service';
+import { LogInModel } from '../../Models/logIn.model';
+import { Test } from '../../Models/test.model';
+import { ResponseBoolean } from '../../Models/responseBoolean.model';
+import { Athlete } from '../../Models/athlete.model';
 @Component({
   selector: 'app-EditUser',
-  templateUrl: './EditUser.component.html'
+  templateUrl: './editUser.component.html'
 })
 export class EditUserComponent implements OnInit{
     public athlete:Athlete;

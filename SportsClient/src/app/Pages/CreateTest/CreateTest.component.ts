@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
-import { RestApiService } from '../../Services/RestService';
-import { LogInModel } from '../../Models/LogIn';
-import { Test } from '../../Models/Test';
-import { LocalSateService } from '../../Services/LocalSatetService';
-import { ResponseBoolean } from '../../Models/ResponseBoolean';
+import { RestApiService } from '../../Services/rest.service';
+import { LocalSateService } from '../../Services/localSatet.service';
+import { LogInModel } from '../../Models/logIn.model';
+import { Test } from '../../Models/test.model';
+import { ResponseBoolean } from '../../Models/responseBoolean.model';
 
 @Component({
   selector: 'app-CreateTest',
-  templateUrl: './CreateTest.component.html'
+  templateUrl: './createTest.component.html'
 })
 export class CreateTestComponent implements OnInit{
     public test:Test;

@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
-import { RestApiService } from '../../Services/RestService';
-import { LogInModel } from '../../Models/LogIn';
-import { Test } from '../../Models/Test';
-import { LocalSateService } from '../../Services/LocalSatetService';
-import { Athlete } from '../../Models/Athlete';
-import { Register } from '../../Models/Register';
+import { RestApiService } from '../../Services/rest.service';
+import { LocalSateService } from '../../Services/localSatet.service';
+import { LogInModel } from '../../Models/logIn.model';
+import { Test } from '../../Models/test.model';
+import { ResponseBoolean } from '../../Models/responseBoolean.model';
+import { Register } from '../../Models/register.model';
 
 @Component({
     selector: 'app-Register',
-    templateUrl: './Register.component.html'
+    templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
     public register: Register;

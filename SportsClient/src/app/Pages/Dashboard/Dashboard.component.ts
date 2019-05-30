@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
-import { RestApiService } from '../../Services/RestService';
-import { LogInModel } from '../../Models/LogIn';
-import { Test } from '../../Models/Test';
-import { LocalSateService } from '../../Services/LocalSatetService';
-import { ResponseBoolean } from '../../Models/ResponseBoolean';
+import { LogInModel } from '../../Models/logIn.model';
+import { Test } from '../../Models/test.model';
+
+import { RestApiService } from '../../Services/rest.service';
+import { LocalSateService } from '../../Services/localSatet.service';
+import { ResponseBoolean } from '../../Models/responseBoolean.model';
 
 @Component({
   selector: 'app-Dashboard',
-  templateUrl: './Dashboard.component.html'
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit{
     public testList:Test[]=[];
