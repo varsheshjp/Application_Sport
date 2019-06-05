@@ -19,6 +19,9 @@ import { EditUserComponent } from './Pages/EditUser/editUser.component';
 import { EditTestComponent } from './Pages/EditTest/editTest.component';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApiInterceptor } from './Interceptor/api.interceptor';
+import { StoreModule } from "@ngrx/store";
+import { testreducer } from './reducer/test.reducer';
+import { athletereducer } from "src/app/reducer/athlete.reducer";
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +38,11 @@ import { ApiInterceptor } from './Interceptor/api.interceptor';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule,FormsModule
+    AppRoutingModule,HttpClientModule,FormsModule,
+     StoreModule.forRoot({
+      test: testreducer,
+      athlete:athletereducer
+    })
   ],
   providers: [RestApiService,HttpClient,LocalSateService,
   { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],

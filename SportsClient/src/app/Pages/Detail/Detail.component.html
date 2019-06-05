@@ -1,6 +1,6 @@
 <div class="container">
     <h1>{{test.type}}:{{test.date}}</h1>
-    <div class="table" *ngIf="athleteList.length>0">
+    <div class="table" >
         <table class="table">
             <tr>
                 <th>Athlete Name</th>
@@ -8,11 +8,11 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            <tr *ngFor="let athlete of athleteList">
+            <tr *ngFor="let athlete of athleteList| async,index as i">
                 <td>{{athlete.name}}</td>
                 <td>{{athlete.result}}</td>
                 <td><button (click)="Edit(athlete)" class="btn btn-primary">Edit</button></td>
-                <td><button (click)="Delete(athlete)" class="btn btn-primary">Delete</button></td>
+                <td><button (click)="Delete(athlete,i)" class="btn btn-primary">Delete</button></td>
             </tr>
         </table>
     </div>

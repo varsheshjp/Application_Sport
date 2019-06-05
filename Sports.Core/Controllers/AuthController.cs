@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Sports.DomainModel.Models;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -30,7 +28,6 @@ namespace Sports.Core.Controllers
             this._userManager = _userManager;
             this._configuration = _configuration;
         }
-        
         [HttpPost]
         [Route("token")]
         public async Task<IActionResult> CreateToken(LoginViewModel loginModel)
@@ -38,18 +35,14 @@ namespace Sports.Core.Controllers
             if (ModelState.IsValid)
             {
                 var loginResult = await _signManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, isPersistent: false, lockoutOnFailure: false);
-
                 if (!loginResult.Succeeded)
                 {
                     return new JsonResult(new { loginResult="fail",token=""});
                 }
-
                 var user = await _userManager.FindByNameAsync(loginModel.Username);
-
                 return new JsonResult(new { loginResult = "success", token = GetToken(user) });
             }
             return new JsonResult(new { loginResult = "fail", token = "" });
-
         }
         
         [Authorize]

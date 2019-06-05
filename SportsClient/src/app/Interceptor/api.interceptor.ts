@@ -28,7 +28,9 @@ import { map, catchError } from 'rxjs/operators';
                 }
                 return event;
             }),catchError((error: HttpErrorResponse) => {
-                sessionStorage.removeItem('token');
+                if(error.status==401){
+                    sessionStorage.removeItem("token");
+                }
                 let data = {};
                 data = {
                     reason: error && error.error.reason ? error.error.reason : '',

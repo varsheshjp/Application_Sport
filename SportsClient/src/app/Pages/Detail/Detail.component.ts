@@ -7,14 +7,20 @@ import { LogInModel } from '../../Models/logIn.model';
 import { Test } from '../../Models/test.model';
 import { ResponseBoolean } from '../../Models/responseBoolean.model';
 import { Athlete } from '../../Models/athlete.model';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.state';
+import * as AthleteActions from '../../actions/athlete.action';
 @Component({
     selector: 'app-Detail',
     templateUrl: './detail.component.html'
 })
 export class DetailComponent implements OnInit {
     test: Test;
-    athleteList: Athlete[] = [];
-    constructor(private _api: RestApiService, private _router: Router, private _localState: LocalSateService) { }
+    athleteList: Observable<Athlete[]>
+    constructor(private _store:Store<AppState>,private _api: RestApiService, private _router: Router, private _localState: LocalSateService) { 
+        this.athleteList=this._store.select('athlete');
+    }
     ngOnInit(): void {
         if (sessionStorage.getItem("token") == null) {
             console.log("at ng on init not log in");
@@ -23,23 +29,23 @@ export class DetailComponent implements OnInit {
         else {
             this.test = this._localState.getTest();
             this._api.getAthleteList(this.test).subscribe((data: Athlete[]) => {
-                this.athleteList = data;
+                let athleteList:Athlete[]=data;
                 this._api.getUsersList().subscribe((data2) => {
-                    for (let j in this.athleteList) {
+                    for (let j in athleteList) {
                         for (let i in data2) {
-                            if (this.athleteList[j].userId == data2[i].id) {
-                                this.athleteList[j].name = data2[i].name;
+                            if (athleteList[j].userId == data2[i].id) {
+                                athleteList[j].name = data2[i].name;
                             }
                         }
                     }
-                })
+                    this._store.dispatch(new AthleteActions.AddAthlete(athleteList));
+                });
             });
         }
     }
-    Delete(athlete: Athlete) {
-
+    Delete(athlete: Athlete,id:number) {
         this._api.deleteAthlete(athlete).subscribe((data) => {
-            this.athleteList = this.athleteList.filter(item => item !== athlete);
+           this._store.dispatch(new AthleteActions.RemoveAthlete(id));
         });
     }
     Add() {
