@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
 import { RestApiService } from '../../Services/rest.service';
-import { LocalSateService } from '../../Services/localSatet.service';
 import { LogInModel } from '../../Models/logIn.model';
 
 @Component({

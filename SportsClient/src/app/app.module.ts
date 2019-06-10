@@ -8,7 +8,6 @@ import { LogInComponent } from './Pages/LogInPage/logInPage.component';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { DashboardComponent } from './Pages/Dashboard/dashboard.component';
-import { LocalSateService } from './Services/localSatet.service';
 import { DetailComponent } from './Pages/Detail/detail.component';
 import { CreateTestComponent } from './Pages/CreateTest/createTest.component';
 import { CreatUserComponent } from './Pages/CreateUser/createUser.component';
@@ -22,6 +21,8 @@ import { ApiInterceptor } from './Interceptor/api.interceptor';
 import { StoreModule } from "@ngrx/store";
 import { testreducer } from './reducer/test.reducer';
 import { athletereducer } from "src/app/reducer/athlete.reducer";
+import { selectedtestreducer } from './reducer/selectedTest.reducer';
+import { selectedathletereducer } from './reducer/selectedAthlete.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,10 +42,12 @@ import { athletereducer } from "src/app/reducer/athlete.reducer";
     AppRoutingModule,HttpClientModule,FormsModule,
      StoreModule.forRoot({
       test: testreducer,
-      athlete:athletereducer
+      athlete:athletereducer,
+      selectedTest:selectedtestreducer,
+      selectedAthlete:selectedathletereducer
     })
   ],
-  providers: [RestApiService,HttpClient,LocalSateService,
+  providers: [RestApiService,HttpClient,
   { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

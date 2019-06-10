@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
 import { RestApiService } from '../../Services/rest.service';
-import { LocalSateService } from '../../Services/localSatet.service';
 import { LogInModel } from '../../Models/logIn.model';
 import { Test } from '../../Models/test.model';
 import { ResponseBoolean } from '../../Models/responseBoolean.model';
@@ -13,7 +12,7 @@ import { ResponseBoolean } from '../../Models/responseBoolean.model';
 })
 export class CreateTestComponent implements OnInit{
     public test:Test;
-    constructor(private _api:RestApiService,private _router: Router,private _localSate:LocalSateService){
+    constructor(private _api:RestApiService,private _router: Router){
         this.test=new Test();
     }
     ngOnInit(): void {

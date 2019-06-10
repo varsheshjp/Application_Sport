@@ -38,7 +38,6 @@ export class RestApiService {
     createTest(test:Test):Observable<ResponseBoolean>{
         return this.http.post<ResponseBoolean>(endpoint + "Test/createTest",{Type:test.type,Date:test.date,Number:test.number});
     }
-
     getAthleteList(test: Test): Observable<Athlete[]> {
         return this.http.get<Athlete[]>(endpoint + "Test/getAthleteByTest/" + test.id);
     }

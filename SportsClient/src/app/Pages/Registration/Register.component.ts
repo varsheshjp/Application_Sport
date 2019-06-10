@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
 import { RestApiService } from '../../Services/rest.service';
-import { LocalSateService } from '../../Services/localSatet.service';
 import { LogInModel } from '../../Models/logIn.model';
 import { Test } from '../../Models/test.model';
 import { ResponseBoolean } from '../../Models/responseBoolean.model';
@@ -14,7 +13,7 @@ import { Register } from '../../Models/register.model';
 })
 export class RegisterComponent implements OnInit {
     public register: Register;
-    constructor(private _api: RestApiService, private _router: Router, private _localState: LocalSateService) {
+    constructor(private _api: RestApiService, private _router: Router) {
         this.register = new Register();
     }
     ngOnInit(): void {

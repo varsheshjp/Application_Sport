@@ -7,7 +7,6 @@ export function athletereducer(state: Athlete[] = [], action: AthleteActions.Act
     switch(action.type) {
         case AthleteActions.ADD_ATHLETE:
             return [...action.payload];
-
         case AthleteActions.REMOVE_ATHLETE:
             state.splice(action.payload, 1)
             return state;

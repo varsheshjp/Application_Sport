@@ -3,4 +3,6 @@ import { Test } from './Models/test.model';
 export interface AppState{
     readonly test:Test[];
     readonly athlete:Athlete[];
+    readonly selectedTest:Test;
+    readonly selectedAthlete:Athlete;
 }

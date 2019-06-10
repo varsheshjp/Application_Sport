@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { OnInit } from "@angular/core";
 import { RestApiService } from '../../Services/rest.service';
-import { LocalSateService } from '../../Services/localSatet.service';
 import { LogInModel } from '../../Models/logIn.model';
 import { Test } from '../../Models/test.model';
 import { ResponseBoolean } from '../../Models/responseBoolean.model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-EditTest',
@@ -13,8 +15,13 @@ import { ResponseBoolean } from '../../Models/responseBoolean.model';
 })
 export class EditTestComponent implements OnInit{
     public test:Test;
-    constructor(private _api:RestApiService,private _router: Router,private _localSate:LocalSateService){
-        this.test=this._localSate.getTest();
+    public testob:Observable<Test>;
+    constructor(private _api:RestApiService,private _router: Router,private _Sate:Store<AppState>){
+        this.testob=this._Sate.select('selectedTest');
+        var sub=this.testob.subscribe((data)=>{
+            this.test=data;
+        });
+        sub.unsubscribe();
     }
     ngOnInit(): void {
         if(sessionStorage.getItem("token")==null){
@@ -24,8 +31,9 @@ export class EditTestComponent implements OnInit{
     }
     EditTest(){
         console.log(this.test);
-        this._api.editTest(this.test).subscribe((data)=>{
+            this._api.editTest(this.test).subscribe((data)=>{
             this._router.navigate(["/Dashboard"]);
         });
+        
     }
 }
